@@ -1,7 +1,7 @@
 import React from "react";
 import Svg, { Path, SvgProps } from "react-native-svg";
 
-const BagIcon = ({ fill, ...rest }: { fill?: string } & SvgProps) => {
+const CartIcon = ({ fill, ...rest }: { fill?: string } & SvgProps) => {
   return (
     <Svg width="24" height="24" viewBox="0 0 24 24" fill="none" {...rest}>
       <Path
@@ -14,4 +14,4 @@ const BagIcon = ({ fill, ...rest }: { fill?: string } & SvgProps) => {
   );
 };
 
-export default BagIcon;
+export default CartIcon;
