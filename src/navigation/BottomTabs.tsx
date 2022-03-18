@@ -1,9 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { theme } from "styles/index";
+import { theme } from "../styles/theme";
 
 // screens
-import { Home, Store, Cart, News, Profile } from "screens/index";
+import { Home, Store, Cart, News, Profile } from "../screens/index";
 
 // components
 import {
@@ -12,7 +12,7 @@ import {
   CartIcon,
   NewsIcon,
   ProfileIcon,
-} from "components/svgicons";
+} from "../components/svgicons/index";
 
 const Tab = createBottomTabNavigator();
 
