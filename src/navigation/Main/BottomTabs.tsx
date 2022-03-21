@@ -22,27 +22,27 @@ const tabs = [
   {
     name: "Home",
     component: Home,
-    icon: ({ color, size: _ }: any) => <HomeIcon fill={color} />,
+    icon: ({ color }: any) => <HomeIcon fill={color} />,
   },
   {
     name: "Store",
     component: Store,
-    icon: ({ color, size: _ }: any) => <StoreIcon fill={color} />,
+    icon: ({ color }: any) => <StoreIcon fill={color} />,
   },
   {
     name: "Cart",
     component: Cart,
-    icon: ({ color, size: _ }: any) => <CartIcon fill={color} />,
+    icon: ({ color }: any) => <CartIcon fill={color} />,
   },
   {
     name: "News",
     component: News,
-    icon: ({ color, size: _ }: any) => <NewsIcon fill={color} />,
+    icon: ({ color }: any) => <NewsIcon fill={color} />,
   },
   {
     name: "Profile",
     component: Profile,
-    icon: ({ color, size: _ }: any) => <ProfileIcon fill={color} />,
+    icon: ({ color }: any) => <ProfileIcon fill={color} />,
   },
 ];
 
@@ -57,11 +57,8 @@ const BottomTabs = () => {
         tabBarActiveTintColor: theme.bottomNavigation.active,
         tabBarInactiveTintColor: theme.bottomNavigation.inactive,
         tabBarShowLabel: false,
-        headerShown: true,
-        headerStyle: {
-          backgroundColor: theme.primary,
-        },
-        tabBarStyle: { ...getBottomTabStyle() },
+        headerShown: false,
+        tabBarStyle: getBottomTabStyle(),
       }}
     >
       {tabs.map((tab, index) => (

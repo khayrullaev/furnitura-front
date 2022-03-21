@@ -1,6 +1,6 @@
 import React from "react";
 import { Platform } from "react-native";
-import { createNativeStackNavigator } from "react-native-screens/native-stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // screens
 import {
@@ -23,8 +23,8 @@ const Auth = () => {
     <Navigator
       initialRouteName="Onboarding"
       screenOptions={{
-        stackAnimation: Platform.OS === "android" ? "fade" : "default",
-        replaceAnimation: "push",
+        animation: Platform.OS === "android" ? "fade" : "default",
+        animationTypeForReplace: "push",
         headerShown: false,
       }}
     >

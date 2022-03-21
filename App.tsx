@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import RootNavigation from "./src/navigation/RootNavigation";
+import RootNavigation from "./src/navigation";
 
 // utils
 import { loadFonts } from "./src/utils";

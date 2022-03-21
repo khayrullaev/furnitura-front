@@ -11,3 +11,11 @@ export type AuthStackParamList = {
   Signup: undefined;
   SignupInfo: undefined;
 };
+
+export type BottomTabParamList = {
+  Home: undefined;
+  Store: undefined;
+  Cart: undefined;
+  News: undefined;
+  Profile: undefined;
+};

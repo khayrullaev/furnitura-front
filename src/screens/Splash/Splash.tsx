@@ -1,9 +1,9 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import React from "react";
 
 const Splash = ({ navigation }: any) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Splash Screen</Text>
       <Button title="Go to Auth" onPress={() => navigation.replace("Auth")} />
       <Button
@@ -13,5 +13,11 @@ const Splash = ({ navigation }: any) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+  },
+});
 
 export default Splash;
