@@ -12,6 +12,9 @@
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "@reduxjs/toolkit": "^1.8.0",
+    "@types/react-redux": "^7.1.23",
+    "@types/redux-persist": "^4.3.1",
     "expo": "~44.0.0",
     "expo-font": "~10.0.5",
     "expo-status-bar": "~1.2.0",
@@ -23,6 +26,8 @@
     "react-native-screens": "~3.10.1",
     "react-native-svg": "^12.3.0",
     "react-native-web": "0.17.1",
+    "react-redux": "^7.2.6",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
