@@ -1,9 +1,8 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { theme } from "../styles/theme";
 
 // screens
-import { Home, Store, Cart, News, Profile } from "../screens/index";
+import { Home, Store, Cart, News, Profile } from "../../screens";
 
 // components
 import {
@@ -12,7 +11,10 @@ import {
   CartIcon,
   NewsIcon,
   ProfileIcon,
-} from "../components/svgicons/index";
+} from "../../components/svgicons";
+
+// theme
+import { theme } from "../../styles/theme";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,9 +51,17 @@ const BottomTabs = () => {
 
   return (
     <Navigator
+      initialRouteName="Home"
+      sceneContainerStyle={{}}
       screenOptions={{
         tabBarActiveTintColor: theme.bottomNavigation.active,
         tabBarInactiveTintColor: theme.bottomNavigation.inactive,
+        tabBarShowLabel: false,
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: theme.primary,
+        },
+        tabBarStyle: { ...getBottomTabStyle() },
       }}
     >
       {tabs.map((tab, index) => (
@@ -59,11 +69,29 @@ const BottomTabs = () => {
           key={index}
           name={tab.name}
           component={tab.component}
-          options={{ tabBarIcon: tab.icon }}
+          options={{
+            tabBarIcon: tab.icon,
+          }}
         />
       ))}
     </Navigator>
   );
+};
+
+const getBottomTabStyle = () => {
+  return {
+    backgroundColor: theme.neutral5,
+    height: 75,
+    borderTopWidth: 0,
+    borderRadius: 15,
+    shadowColor: theme.shadow,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      height: 0,
+      width: -4,
+    },
+    shadowRadius: 30,
+  };
 };
 
 export default BottomTabs;

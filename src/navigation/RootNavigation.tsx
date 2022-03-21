@@ -1,33 +1,49 @@
 import React from "react";
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+import { Platform } from "react-native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import BottomTabs from "./BottomTabs";
 
-const Stack = createNativeStackNavigator();
+// navigation
+import Auth from "./Auth";
+import Main from "./Main/Main";
 
-function RootNavigation() {
+// screens
+import Splash from "../screens/Splash";
+
+//types
+import { RootStackParamList } from "../types/navigation";
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const RootNavigation = () => {
+  const { Navigator, Screen } = Stack;
+
+  // change the app background to white
+  const GlobalTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: "white",
+    },
+  };
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator
+    <NavigationContainer theme={GlobalTheme}>
+      <Navigator
+        initialRouteName={"SplashScreen"}
         screenOptions={{
-          headerTransparent: true,
+          animation: Platform.OS === "android" ? "fade" : "default",
+          animationTypeForReplace: "push",
+          headerShown: false,
         }}
       >
-        <Stack.Screen
-          key={1}
-          name="BottomTabs"
-          component={BottomTabs}
-          options={
-            {
-              headerBackTitleVisible: false,
-              headerTitle: "",
-            } as any
-          }
-        />
-      </Stack.Navigator>
+        <Screen name="SplashScreen" component={Splash} />
+        <Screen name="Auth" component={Auth} />
+        <Screen name="Main" component={Main} />
+      </Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default RootNavigation;
