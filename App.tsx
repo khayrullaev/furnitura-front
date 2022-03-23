@@ -21,6 +21,8 @@ export default function App() {
     });
   }, []);
 
+  console.log('App started')
+
   if (!loaded) return null;
   return (
     <Provider store={store}>

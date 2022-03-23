@@ -16,12 +16,20 @@ import {
 // theme
 import { theme } from "../../styles/theme";
 
+// components
+import { TabHeader } from "../../components/layout";
+
 const Tab = createBottomTabNavigator();
 
 const tabs = [
   {
     name: "Home",
-    component: Home,
+    component: () => (
+      <>
+        <TabHeader />
+        <Home />
+      </>
+    ),
     icon: ({ color }: any) => <HomeIcon fill={color} />,
   },
   {
@@ -58,6 +66,7 @@ const BottomTabs = () => {
         tabBarInactiveTintColor: theme.bottomNavigation.inactive,
         tabBarShowLabel: false,
         headerShown: false,
+        headerStatusBarHeight: 40,
         tabBarStyle: getBottomTabStyle(),
       }}
     >
