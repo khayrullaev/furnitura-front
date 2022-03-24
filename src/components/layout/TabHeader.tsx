@@ -1,15 +1,21 @@
 import React from "react";
-import { Text, StatusBar } from "react-native";
 import styled from "styled-components/native";
 
 // styles
 import { theme } from "../../styles";
 
-const TabHeader = () => {
-  const height = StatusBar.currentHeight;
+// assets
+import { SearchIcon } from "../svgicons";
+
+const TabHeader = ({ title }: String) => {
   return (
     <MainWrapper>
-      <ScreenName>Home</ScreenName>
+      <Wrapper>
+        <ScreenName>{title}</ScreenName>
+        <IconWrapper>
+          <SearchIcon />
+        </IconWrapper>
+      </Wrapper>
     </MainWrapper>
   );
 };
@@ -23,7 +29,25 @@ const MainWrapper = styled.View`
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  padding-top: 35px;
+  padding: 50px 24px 24px;
+`;
+
+const IconWrapper = styled.View`
+  width: 44px;
+  height: 44px;
+  border-radius: 50;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Wrapper = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ScreenName = styled.Text`
@@ -32,5 +56,4 @@ const ScreenName = styled.Text`
   line-height: 48px;
   letter-spacing: -0.3px;
   color: ${theme.neutral1};
-  border: 1px solid red;
 `;

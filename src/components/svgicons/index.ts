@@ -3,5 +3,6 @@ import StoreIcon from "./Store";
 import CartIcon from "./Cart";
 import NewsIcon from "./News";
 import ProfileIcon from "./Profile";
+import SearchIcon from "./Search";
 
-export { HomeIcon, StoreIcon, CartIcon, NewsIcon, ProfileIcon };
+export { HomeIcon, StoreIcon, CartIcon, NewsIcon, ProfileIcon, SearchIcon };

@@ -26,7 +26,7 @@ const tabs = [
     name: "Home",
     component: () => (
       <>
-        <TabHeader />
+        <TabHeader title="Home" />
         <Home />
       </>
     ),
