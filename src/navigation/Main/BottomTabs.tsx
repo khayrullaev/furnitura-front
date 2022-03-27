@@ -24,31 +24,31 @@ const Tab = createBottomTabNavigator();
 const tabs = [
   {
     name: "Home",
-    component: () => (
-      <>
-        <TabHeader title="Home" />
-        <Home />
-      </>
-    ),
+    withHeader: true,
+    component: Home,
     icon: ({ color }: any) => <HomeIcon fill={color} />,
   },
   {
     name: "Store",
+    withHeader: true,
     component: Store,
     icon: ({ color }: any) => <StoreIcon fill={color} />,
   },
   {
     name: "Cart",
+    withHeader: true,
     component: Cart,
     icon: ({ color }: any) => <CartIcon fill={color} />,
   },
   {
     name: "News",
+    withHeader: true,
     component: News,
     icon: ({ color }: any) => <NewsIcon fill={color} />,
   },
   {
     name: "Profile",
+    withHeader: false,
     component: Profile,
     icon: ({ color }: any) => <ProfileIcon fill={color} />,
   },
@@ -74,11 +74,19 @@ const BottomTabs = () => {
         <Screen
           key={index}
           name={tab.name}
-          component={tab.component}
           options={{
             tabBarIcon: tab.icon,
           }}
-        />
+        >
+          {tab.withHeader
+            ? (props: any) => (
+                <>
+                  <TabHeader title={tab.name} />
+                  <tab.component {...props} />
+                </>
+              )
+            : tab.component}
+        </Screen>
       ))}
     </Navigator>
   );

@@ -1,6 +1,6 @@
 export type RootStackParamList = {
   SplashScreen: undefined;
-  Auth: undefined;
+  Auth: undefined | { screen: string };
   Main: undefined;
 };
 

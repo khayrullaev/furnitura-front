@@ -15,10 +15,31 @@ export const colors = {
 
 export const theme = {
   primary: colors.main,
+  disabled: colors.neutral4,
   bottomNavigation: {
     backgroundColor: colors.neutral5,
     active: colors.main,
     inactive: colors.neutral3,
   },
   ...colors,
+  fonts: {
+    regular: "Montserrat",
+    regularItalic: "MontserratItalic",
+    thin: "MontserratThin",
+    thinItalic: "MontserratThinItalic",
+    medium: "MontserratMedium",
+    mediumItalic: "MontserratMediumItalic",
+    black: "MontserratBlack",
+    blackItalic: "MontserratBlackItalic",
+    semiBold: "MontserratSemiBold",
+    semiBoldItalic: "MontserratSemiBoldItalic",
+    bold: "MontserratBold",
+    boldItalic: "MontserratBoldItalic",
+    extraBold: "MontserratExtraBold",
+    extraBoldItalic: "MontserratExtraBoldItalic",
+    light: "MontserratLight",
+    lightItalic: "MontserratLightItalic",
+    extraLight: "MontserratExtraLight",
+    extraLightItalic: "MontserratExtraLightItalic",
+  },
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Platform } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -21,7 +21,7 @@ const Auth = () => {
 
   return (
     <Navigator
-      initialRouteName="Onboarding"
+      initialRouteName="Login"
       screenOptions={{
         animation: Platform.OS === "android" ? "fade" : "default",
         animationTypeForReplace: "push",
