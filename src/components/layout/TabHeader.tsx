@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components/native";
 import Constants from "expo-constants";
 
+// components
+import IconButton from "../common/IconButton";
+import { SearchIcon } from "../svgicons";
+
 // styles
 import { theme } from "../../styles";
-
-// assets
-import { SearchIcon } from "../svgicons";
 
 type Props = {
   title: string;
@@ -17,12 +18,7 @@ const TabHeader = ({ title }: Props) => {
     <HeaderWrapper>
       <Wrapper>
         <ScreenName>{title ? title : "Screen"}</ScreenName>
-        <IconWrapper
-          style={{ borderRadius: 50 }}
-          onPress={() => console.log("5454")}
-        >
-          <SearchIcon />
-        </IconWrapper>
+        <IconButton onPress={() => console.log("5454")} icon={SearchIcon} />
       </Wrapper>
     </HeaderWrapper>
   );

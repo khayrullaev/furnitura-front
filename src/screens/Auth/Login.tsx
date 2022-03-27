@@ -1,11 +1,14 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { Text } from "react-native";
+
+// components
+import { Screen } from "../../components/layout";
 
 const Login = () => {
   return (
-    <View>
+    <Screen headerProps={{ title: "Login", withBackButton: false }}>
       <Text>Login Screen</Text>
-    </View>
+    </Screen>
   );
 };
 
