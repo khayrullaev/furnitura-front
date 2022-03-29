@@ -5,6 +5,8 @@ import NewsIcon from "./News";
 import ProfileIcon from "./Profile";
 import SearchIcon from "./Search";
 import LeftArrow from "./LeftArrow";
+import EyeOn from "./EyeOn";
+import EyeOff from "./EyeOff";
 
 export {
   HomeIcon,
@@ -14,4 +16,6 @@ export {
   ProfileIcon,
   SearchIcon,
   LeftArrow,
+  EyeOn,
+  EyeOff,
 };

@@ -5,7 +5,7 @@ import * as Yup from "yup";
 
 // components
 import { Screen } from "../../components/layout";
-import { TextField } from "../../components/form";
+import { PasswordField, TextField } from "../../components/form";
 import { Button } from "../../components/common";
 
 const Login = () => {
@@ -33,7 +33,7 @@ const Login = () => {
                 label="Email"
                 placeholder="abcdef@gmail.com"
               />
-              <TextField
+              <PasswordField
                 name="password"
                 label="Password"
                 placeholder="6-20  words"
