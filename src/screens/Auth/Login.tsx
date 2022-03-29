@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { Screen } from "../../components/layout";
 import { PasswordField, TextField } from "../../components/form";
 import { Button } from "../../components/common";
+import { theme } from "../../styles";
 
 const Login = () => {
   const ValidationSchema = Yup.object().shape({
@@ -39,7 +40,14 @@ const Login = () => {
                 placeholder="6-20  words"
                 successMsg="Valid password!"
               />
-              <Button title="Submit" onPress={submitForm} />
+              <Button variant="contained" title="Submit" onPress={submitForm} />
+              <Button
+                variant="text"
+                title="Submit"
+                onPress={submitForm}
+                textButtonSize={18}
+                textButtonColor={theme.blueSemantic}
+              />
             </>
           )}
         </Formik>
