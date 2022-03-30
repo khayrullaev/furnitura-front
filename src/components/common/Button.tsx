@@ -9,7 +9,7 @@ type Props = {
   variant: "contained" | "text";
   title: string;
   onPress: () => void;
-  disabled?: boolean;
+  disabled?: boolean | undefined;
   textButtonColor?: string;
   textButtonSize?: number;
   buttonStyle?: StyleProp<ViewStyle>;
@@ -37,7 +37,7 @@ const CustomButton = ({
     );
   } else {
     return (
-      <TextButton activeOpacity={0.8}>
+      <TextButton activeOpacity={0.8} onPress={onPress}>
         <TextButtonTitle
           disabled={disabled}
           color={textButtonColor}

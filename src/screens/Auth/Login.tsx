@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -7,16 +8,27 @@ import * as Yup from "yup";
 import { Screen } from "../../components/layout";
 import { PasswordField, TextField } from "../../components/form";
 import { Button } from "../../components/common";
+
+// styles
 import { theme } from "../../styles";
 
 const Login = () => {
+  const navigation = useNavigation();
+
   const ValidationSchema = Yup.object().shape({
     email: Yup.string().email("Please insert a valid email address!"),
     password: Yup.string().required("Password is required!"),
   });
 
   return (
-    <Screen headerProps={{ title: "Login", withBackButton: false }}>
+    <Screen
+      headerProps={{ title: "Login", withBackButton: false }}
+      screenStyle={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       <FormWrapper>
         <Formik
           initialValues={{
@@ -25,7 +37,7 @@ const Login = () => {
           }}
           validateOnBlur={true}
           validationSchema={ValidationSchema}
-          onSubmit={(values) => console.log("Form values: ", values)}
+          onSubmit={(values) => navigation.replace("Main")}
         >
           {({ submitForm }) => (
             <>
@@ -38,27 +50,65 @@ const Login = () => {
                 name="password"
                 label="Password"
                 placeholder="6-20  words"
-                successMsg="Valid password!"
               />
-              <Button variant="contained" title="Submit" onPress={submitForm} />
+              <ForgotButtonWrapper>
+                <Button
+                  variant="text"
+                  title="Forgot your password?"
+                  textButtonSize={14}
+                  textButtonColor={theme.blueSemantic}
+                  onPress={() => navigation.navigate("ForgotPassword")}
+                />
+              </ForgotButtonWrapper>
               <Button
-                variant="text"
-                title="Submit"
+                variant="contained"
+                title="Sign in"
                 onPress={submitForm}
-                textButtonSize={18}
-                textButtonColor={theme.blueSemantic}
               />
             </>
           )}
         </Formik>
       </FormWrapper>
+      <SignupButtonWrapper>
+        <Question>{`Don't have an account? `}</Question>
+        <Button
+          variant="text"
+          title="Sign up"
+          textButtonSize={18}
+          textButtonColor={theme.primary}
+          onPress={() => navigation.navigate("Signup")}
+        />
+      </SignupButtonWrapper>
     </Screen>
   );
 };
 
 const FormWrapper = styled.View`
   width: 100%;
+  height: 90%;
   padding: 24px;
+`;
+
+const ForgotButtonWrapper = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+`;
+
+const Question = styled.Text`
+  font-family: ${theme.fonts.regular};
+  font-size: 12px;
+  line-height: 18px;
+  color: ${theme.neutral2};
+`;
+
+const SignupButtonWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
 `;
 
 export default Login;

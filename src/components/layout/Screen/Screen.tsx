@@ -6,7 +6,7 @@ import Header, { HeaderProps } from "./Header";
 type Props = {
   headerProps: HeaderProps;
   screenStyle?: StyleProp<ViewStyle>;
-  children?: JSX.Element;
+  children?: JSX.Element[] | JSX.Element;
 };
 
 const Screen = ({ headerProps, screenStyle = {}, children }: Props) => {

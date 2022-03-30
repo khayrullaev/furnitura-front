@@ -21,13 +21,15 @@ const getCurrentRoute = () => {
 const reset = () => {
   navigationRef.current?.resetRoot({
     index: 0,
-    routes: [{ name: "Home" }],
+    routes: [{ name: "Tabs" }],
   });
 };
 
-export const navigation = {
+const navigation = {
   navigate,
   goBack,
   getCurrentRoute,
   reset,
 };
+
+export default navigation;

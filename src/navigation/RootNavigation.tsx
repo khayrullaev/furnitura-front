@@ -14,6 +14,9 @@ import Splash from "../screens/Splash";
 //types
 import { RootStackParamList } from "../types/navigation";
 
+// utils
+import { navigationRef } from "../utils";
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigation = () => {
@@ -29,7 +32,7 @@ const RootNavigation = () => {
   };
 
   return (
-    <NavigationContainer theme={GlobalTheme}>
+    <NavigationContainer theme={GlobalTheme} ref={navigationRef}>
       <Navigator
         initialRouteName={"SplashScreen"}
         screenOptions={{
