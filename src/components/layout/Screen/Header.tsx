@@ -9,7 +9,7 @@ import { LeftArrow } from "../../svgicons";
 import { theme } from "../../../styles";
 
 // utils
-import { navigation } from "../../../utils";
+import navigation from "../../../utils/navigation";
 
 export type HeaderProps = {
   title: string;

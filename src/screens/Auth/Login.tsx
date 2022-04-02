@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components/native";
-import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -12,9 +11,7 @@ import { Button } from "../../components/common";
 // styles
 import { theme } from "../../styles";
 
-const Login = () => {
-  const navigation = useNavigation();
-
+const Login = ({ navigation }: any) => {
   const ValidationSchema = Yup.object().shape({
     email: Yup.string().email("Please insert a valid email address!"),
     password: Yup.string().required("Password is required!"),
@@ -98,7 +95,7 @@ const ForgotButtonWrapper = styled.View`
 
 const Question = styled.Text`
   font-family: ${theme.fonts.regular};
-  font-size: 12px;
+  font-size: 14px;
   line-height: 18px;
   color: ${theme.neutral2};
 `;

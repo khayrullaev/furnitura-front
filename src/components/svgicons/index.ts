@@ -7,6 +7,7 @@ import SearchIcon from "./Search";
 import LeftArrow from "./LeftArrow";
 import EyeOn from "./EyeOn";
 import EyeOff from "./EyeOff";
+import AvatarIcon from "./Avatar";
 
 export {
   HomeIcon,
@@ -18,4 +19,5 @@ export {
   LeftArrow,
   EyeOn,
   EyeOff,
+  AvatarIcon,
 };
