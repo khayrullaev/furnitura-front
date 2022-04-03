@@ -21,10 +21,10 @@ const SignupInfo = ({ navigation, route }: any) => {
       <Formik
         initialValues={
           {
-            // name: route.params.name,
-            // email: route.params.email,
-            // password: route.params.password,
-            // passwordConfirm: route.params.passwordConfirm,
+            name: route.params.name,
+            email: route.params.email,
+            password: route.params.password,
+            passwordConfirm: route.params.passwordConfirm,
           }
         }
         onSubmit={(values) => navigation.navigate("SignupInfo")}
