@@ -9,6 +9,10 @@ import { PasswordField, TextField, ImagePicker } from "../../components/form";
 import { Button } from "../../components/common";
 
 const SignupInfo = ({ navigation, route }: any) => {
+  const handleSignup = (values: any) => {
+    console.log(values);
+  };
+
   return (
     <Screen
       headerProps={{ title: "Information", withBackButton: true }}
@@ -19,15 +23,13 @@ const SignupInfo = ({ navigation, route }: any) => {
       }}
     >
       <Formik
-        initialValues={
-          {
-            name: route.params.name,
-            email: route.params.email,
-            password: route.params.password,
-            passwordConfirm: route.params.passwordConfirm,
-          }
-        }
-        onSubmit={(values) => navigation.navigate("SignupInfo")}
+        initialValues={{
+          name: route.params.name,
+          email: route.params.email,
+          password: route.params.password,
+          passwordConfirm: route.params.passwordConfirm,
+        }}
+        onSubmit={(values) => handleSignup(values)}
       >
         {({ submitForm }) => (
           <FormWrapper>
@@ -70,7 +72,6 @@ const SignupInfo = ({ navigation, route }: any) => {
 };
 
 const FormWrapper = styled.View`
-  border: 1px solid red;
   width: 100%;
   height: 90%;
   padding: 24px 24px 10px 24px;

@@ -21,7 +21,7 @@ const Auth = () => {
 
   return (
     <Navigator
-      initialRouteName="SignupInfo"
+      initialRouteName="Login"
       screenOptions={{
         animation: Platform.OS === "android" ? "fade" : "default",
         animationTypeForReplace: "push",

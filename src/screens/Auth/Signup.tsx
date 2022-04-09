@@ -38,7 +38,7 @@ const Signup = ({ navigation }: any) => {
         }}
         validationSchema={ValidationSchema}
         validateOnBlur={true}
-        onSubmit={(values) => navigation.navigate("SignupInfo", values)}
+        onSubmit={(values) => navigation.navigate("SignupInfo", { ...values })}
       >
         {({ submitForm }) => (
           <FormWrapper>
