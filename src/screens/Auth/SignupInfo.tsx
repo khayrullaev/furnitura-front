@@ -5,7 +5,7 @@ import { Formik } from "formik";
 
 // components
 import { Screen } from "../../components/layout";
-import { PasswordField, TextField, ImagePicker } from "../../components/form";
+import { TextField, ImagePicker, DatePicker } from "../../components/form";
 import { Button } from "../../components/common";
 
 const SignupInfo = ({ navigation, route }: any) => {
@@ -24,10 +24,9 @@ const SignupInfo = ({ navigation, route }: any) => {
     >
       <Formik
         initialValues={{
-          name: route.params.name,
-          email: route.params.email,
-          password: route.params.password,
-          passwordConfirm: route.params.passwordConfirm,
+          address: "",
+          birthdate: new Date(),
+          phone: "",
         }}
         onSubmit={(values) => handleSignup(values)}
       >
@@ -38,28 +37,19 @@ const SignupInfo = ({ navigation, route }: any) => {
                 <ImagePicker />
               </AvatarWrapper>
               <TextField
-                name="name"
-                label="Name"
-                placeholder="John Doe"
-                disabled={true}
+                name="address"
+                label="Address"
+                placeholder="123, Central Stree, LA"
+              />
+              <DatePicker
+                name="birthdate"
+                label="Date of birth"
+                placeholder="01/01/1995"
               />
               <TextField
-                name="email"
-                label="Email"
-                placeholder="abcdef@gmail.com"
-                disabled={true}
-              />
-              <PasswordField
-                name="password"
-                label="Password"
-                placeholder="6-20  words"
-                disabled={true}
-              />
-              <PasswordField
-                name="passwordConfirm"
-                label="Repeat Password"
-                placeholder="6-20  words"
-                disabled={true}
+                name="phone"
+                label="Phone number"
+                placeholder="012-3456-7890"
               />
             </View>
 
@@ -74,7 +64,7 @@ const SignupInfo = ({ navigation, route }: any) => {
 const FormWrapper = styled.View`
   width: 100%;
   height: 90%;
-  padding: 24px 24px 10px 24px;
+  padding: 0px 24px 10px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
