@@ -55,6 +55,7 @@ const Onboarding = ({
         <View>
           {currentSlideIndex === slides.length - 1 ? (
             <Button
+              variant="contained"
               title={"Done"}
               onPress={() => {
                 AsyncStorage.setItem("isInitialLaunch", "N");
@@ -62,7 +63,11 @@ const Onboarding = ({
               }}
             />
           ) : (
-            <Button title={"Next"} onPress={goToNextSlide} />
+            <Button
+              variant="contained"
+              title={"Next"}
+              onPress={goToNextSlide}
+            />
           )}
         </View>
       </FooterWrapper>

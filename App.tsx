@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import "react-native-gesture-handler";
 
 // navigation
 import RootNavigation from "./src/navigation";
@@ -21,7 +22,7 @@ export default function App() {
     });
   }, []);
 
-  console.log('App started')
+  console.log("App started");
 
   if (!loaded) return null;
   return (

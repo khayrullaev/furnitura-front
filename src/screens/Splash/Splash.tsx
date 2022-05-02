@@ -32,12 +32,15 @@ const Splash = ({ navigation }: Props) => {
   };
 
   useEffect(() => {
-    const isInitialLaunch: any = AsyncStorage.getItem("isInitialLaunch");
-    if (isInitialLaunch === "Y") {
-      navigation.replace("Auth", { screen: "Onboarding" });
-    } else {
-      getUserInfo();
-    }
+    const init = async () => {
+      const isInitialLaunch = await AsyncStorage.getItem("isInitialLaunch");
+      if (isInitialLaunch !== "N") {
+        navigation.replace("Auth", { screen: "Onboarding" });
+      } else {
+        getUserInfo();
+      }
+    };
+    init();
   }, []);
 
   return <Wrapper />;
