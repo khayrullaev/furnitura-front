@@ -12,6 +12,7 @@ import { loadFonts } from "./src/utils";
 
 // redux
 import { persistor, store } from "./src/redux/store";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +29,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <RootNavigation />
+        <BottomSheetModalProvider>
+          <RootNavigation />
+        </BottomSheetModalProvider>
       </PersistGate>
     </Provider>
   );

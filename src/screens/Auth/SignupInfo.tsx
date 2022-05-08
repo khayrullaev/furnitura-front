@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components/native";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { Formik } from "formik";
 
 // components

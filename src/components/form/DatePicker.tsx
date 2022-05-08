@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { useField } from "formik";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import styled from "styled-components/native";
 
 // styles
@@ -14,31 +13,17 @@ type Props = {
   disabled?: boolean;
 };
 
-const DatePicker = ({
-  name,
-  label,
-  successMsg,
-  placeholder,
-  disabled,
-}: Props) => {
+const DatePicker = ({ name, label, placeholder, disabled }: Props) => {
   const [field, meta, helpers]: any = useField(name);
   const { setValue } = helpers;
 
   return (
     <Wrapper>
       <Label>{label ? label : "Date"}</Label>
-      <Input>
-        {/* <DateTimePicker
-          value={field.value}
-          display="spinner"
-          mode="date"
-          onChange={(event: any, date: any) => setValue(date)}
-        /> */}
-      </Input>
-      {meta.touched && meta.error && <Meta type="error">{meta.error}</Meta>}
-      {meta.touched && !meta.error && successMsg && (
-        <Meta type="success">{successMsg} </Meta>
-      )}
+
+      <InputBox>
+        <Placeholder>{placeholder}</Placeholder>
+      </InputBox>
     </Wrapper>
   );
 };
@@ -58,7 +43,7 @@ const Label = styled.Text`
   margin-bottom: 12px;
 `;
 
-const Input = styled.View`
+const InputBox = styled.View`
   width: 100%;
   height: 44px;
   border: 1px solid ${theme.neutral3};
@@ -67,13 +52,11 @@ const Input = styled.View`
   margin-bottom: 8px;
 `;
 
-const Meta = styled.Text<{ type: "error" | "success" }>`
-  font-family: ${theme.fonts.regular};
-  font-size: 12px;
-  line-height: 12px;
-  padding-left: 4px;
-  color: ${(props) =>
-    props.type === "error" ? theme.redSemantic : theme.greenSemantic};
+const Placeholder = styled.Text`
+  font-family: "Montserrat";
+  font-size: 14px;
+  line-height: 24px;
+  color: ${theme.neutral3};
 `;
 
 export default DatePicker;
