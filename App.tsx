@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import "react-native-gesture-handler";
 
 // navigation
 import RootNavigation from "./src/navigation";
+
+// context
+import { LoadingProvider } from "./src/context";
 
 // utils
 import { loadFonts } from "./src/utils";
 
 // redux
 import { persistor, store } from "./src/redux/store";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,9 +32,11 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BottomSheetModalProvider>
-          <RootNavigation />
-        </BottomSheetModalProvider>
+        <LoadingProvider>
+          <BottomSheetModalProvider>
+            <RootNavigation />
+          </BottomSheetModalProvider>
+        </LoadingProvider>
       </PersistGate>
     </Provider>
   );

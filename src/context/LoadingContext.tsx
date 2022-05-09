@@ -3,6 +3,9 @@ import styled from "styled-components/native";
 import { View } from "react-native-animatable";
 import { MaterialIndicator } from "react-native-indicators";
 
+// styles
+import { theme } from "../styles";
+
 interface LoadingContextInterface {
   toggleLoadng: (loading: boolean) => void;
 }
@@ -21,7 +24,7 @@ export const LoadingProvider: React.FC = ({ children }) => {
       {children}
       {visible && (
         <Wrapper animation={"fadeIn"} duration={300}>
-          <MaterialIndicator color={"#000"} size={100} />
+          <MaterialIndicator color={theme.main} size={50} />
         </Wrapper>
       )}
     </LoadingContext.Provider>
