@@ -31,7 +31,7 @@ export const LoadingProvider: React.FC = ({ children }) => {
   );
 };
 
-const Wrapper = styled(View)`
+const Wrapper = styled<any>(View)`
   width: 100%;
   height: 100%;
   position: absolute;

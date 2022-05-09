@@ -1,9 +1,9 @@
+import "react-native-gesture-handler";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import "react-native-gesture-handler";
 
 // navigation
 import RootNavigation from "./src/navigation";
