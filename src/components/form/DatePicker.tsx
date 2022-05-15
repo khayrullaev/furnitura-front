@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useField } from "formik";
 import styled from "styled-components/native";
 
 // styles
 import { theme } from "../../styles";
+import { DrawerDatePicker } from "../common";
 
 type Props = {
   name: string;
@@ -16,15 +17,23 @@ type Props = {
 const DatePicker = ({ name, label, placeholder, disabled }: Props) => {
   const [field, meta, helpers]: any = useField(name);
   const { setValue } = helpers;
+  const [open, setOpen] = useState(false);
 
   return (
-    <Wrapper>
-      <Label>{label ? label : "Date"}</Label>
+    <>
+      <Wrapper>
+        <Label>{label ? label : "Date"}</Label>
+        <InputBox onPress={() => setOpen(true)}>
+          <Placeholder>{placeholder}</Placeholder>
+        </InputBox>
+      </Wrapper>
 
-      <InputBox>
-        <Placeholder>{placeholder}</Placeholder>
-      </InputBox>
-    </Wrapper>
+      <DrawerDatePicker
+        open={open}
+        setOpen={setOpen}
+        onSubmit={() => console.log("sooss")}
+      />
+    </>
   );
 };
 
@@ -43,7 +52,7 @@ const Label = styled.Text`
   margin-bottom: 12px;
 `;
 
-const InputBox = styled.View`
+const InputBox = styled.TouchableOpacity`
   width: 100%;
   height: 44px;
   border: 1px solid ${theme.neutral3};

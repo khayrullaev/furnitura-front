@@ -32,11 +32,11 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <LoadingProvider>
-          <BottomSheetModalProvider>
+        <BottomSheetModalProvider>
+          <LoadingProvider>
             <RootNavigation />
-          </BottomSheetModalProvider>
-        </LoadingProvider>
+          </LoadingProvider>
+        </BottomSheetModalProvider>
       </PersistGate>
     </Provider>
   );
