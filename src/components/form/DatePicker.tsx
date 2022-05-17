@@ -23,14 +23,14 @@ const DatePicker = ({ name, label, placeholder, disabled }: Props) => {
     <Wrapper>
       <Label>{label ? label : "Date"}</Label>
       <InputBox onPress={() => setOpen(true)}>
-        <Placeholder>{placeholder}</Placeholder>
+        {field.value ? (
+          <InputText>{field.value.toLocaleDateString()}</InputText>
+        ) : (
+          <Placeholder>{placeholder}</Placeholder>
+        )}
       </InputBox>
 
-      <DrawerDatePicker
-        open={open}
-        setOpen={setOpen}
-        onSubmit={() => console.log("sooss")}
-      />
+      <DrawerDatePicker open={open} setOpen={setOpen} onSubmit={setValue} />
     </Wrapper>
   );
 };
@@ -40,6 +40,10 @@ const Wrapper = styled.View`
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 16px;
+`;
+
+const InputText = styled.Text`
+  padding-top: 2px;
 `;
 
 const Label = styled.Text`

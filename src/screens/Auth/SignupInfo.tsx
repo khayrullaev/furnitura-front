@@ -1,11 +1,16 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components/native";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { Formik } from "formik";
 
 // components
 import { Screen } from "../../components/layout";
-import { TextField, ImagePicker, DatePicker } from "../../components/form";
+import {
+  TextField,
+  ImagePicker,
+  DatePicker,
+  PhoneNumberInput,
+} from "../../components/form";
 import { Button } from "../../components/common";
 
 const SignupInfo = ({ navigation, route }: any) => {
@@ -25,7 +30,7 @@ const SignupInfo = ({ navigation, route }: any) => {
       <Formik
         initialValues={{
           address: "",
-          birthdate: new Date(),
+          birthdate: "",
           phone: "",
         }}
         onSubmit={(values) => handleSignup(values)}
@@ -46,7 +51,7 @@ const SignupInfo = ({ navigation, route }: any) => {
                 label="Date of birth"
                 placeholder="01/01/1995"
               />
-              <TextField
+              <PhoneNumberInput
                 name="phone"
                 label="Phone number"
                 placeholder="012-3456-7890"

@@ -1,4 +1,10 @@
-import React, { useMemo, useRef, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  useMemo,
+  useRef,
+  useCallback,
+  useEffect,
+} from "react";
 import { StyleSheet } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {
@@ -16,10 +22,12 @@ import { theme } from "../../styles";
 type Props = {
   open: boolean;
   setOpen: (open: boolean) => void;
-  onSubmit: () => void;
+  onSubmit: (date: Date) => void;
 };
 
 function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
+  const [date, setDate] = useState<Date>(new Date("1990-01-01"));
+
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -55,6 +63,7 @@ function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
     ),
     []
   );
+
   return (
     <BottomSheetModal
       enablePanDownToClose={true}
@@ -67,15 +76,18 @@ function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
     >
       <BottomSheetView style={styles.contentContainer}>
         <DateTimePicker
-          value={new Date()}
+          value={date}
           display="spinner"
           mode="date"
-          // onChange={(event: any, date: any) => setValue(date)}
+          onChange={(event: any, date: Date) => setDate(date)}
         />
         <Button
           variant="contained"
           title="Select"
-          onPress={() => console.log("Submit")}
+          onPress={() => {
+            onSubmit(date);
+            handleSheetClose();
+          }}
         />
       </BottomSheetView>
     </BottomSheetModal>
