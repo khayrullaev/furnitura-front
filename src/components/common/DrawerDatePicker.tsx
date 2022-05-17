@@ -1,20 +1,21 @@
 import React, { useMemo, useRef, useCallback, useEffect } from "react";
-import { View, Text, Button, StyleSheet, Alert, TextInput } from "react-native";
-
-import BottomSheet, {
+import { StyleSheet } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import {
   BottomSheetBackdrop,
   BottomSheetModal,
-  BottomSheetModalProvider,
   BottomSheetView,
-  BottomSheetBackdropProps,
 } from "@gorhom/bottom-sheet";
+
+// components
+import { Button } from "../common";
 
 // theme
 import { theme } from "../../styles";
 
 type Props = {
   open: boolean;
-  setOpen: (open: boolean) => {};
+  setOpen: (open: boolean) => void;
   onSubmit: () => void;
 };
 
@@ -23,7 +24,7 @@ function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // variables
-  const snapPoints = useMemo(() => ["25%", "50%", "75%"], []);
+  const snapPoints = useMemo(() => ["45%"], []);
 
   // callbacks
   const handleSheetOpen = useCallback(() => {
@@ -47,7 +48,7 @@ function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
       <BottomSheetBackdrop
         {...props}
         disappearsOnIndex={-1}
-        appearsOnIndex={1}
+        appearsOnIndex={0}
         pressBehavior="close"
         opacity={0.3}
       />
@@ -58,15 +59,24 @@ function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
     <BottomSheetModal
       enablePanDownToClose={true}
       ref={bottomSheetModalRef}
-      index={1}
+      index={0}
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
       backdropComponent={renderBackdrop}
       handleIndicatorStyle={{ backgroundColor: theme.main }}
     >
       <BottomSheetView style={styles.contentContainer}>
-        <Text>Awesome 🎉</Text>
-        <Button onPress={handleSheetClose} title="Close Modal" color="black" />
+        <DateTimePicker
+          value={new Date()}
+          display="spinner"
+          mode="date"
+          // onChange={(event: any, date: any) => setValue(date)}
+        />
+        <Button
+          variant="contained"
+          title="Select"
+          onPress={() => console.log("Submit")}
+        />
       </BottomSheetView>
     </BottomSheetModal>
   );
@@ -80,8 +90,13 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   contentContainer: {
-    flex: 1,
-    alignItems: "center",
+    height: "100%",
+    paddingTop: 20,
+    paddingHorizontal: 10,
+    paddingBottom: 30,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
 });
 

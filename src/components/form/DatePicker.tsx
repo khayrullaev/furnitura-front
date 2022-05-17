@@ -20,20 +20,18 @@ const DatePicker = ({ name, label, placeholder, disabled }: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <Wrapper>
-        <Label>{label ? label : "Date"}</Label>
-        <InputBox onPress={() => setOpen(true)}>
-          <Placeholder>{placeholder}</Placeholder>
-        </InputBox>
-      </Wrapper>
+    <Wrapper>
+      <Label>{label ? label : "Date"}</Label>
+      <InputBox onPress={() => setOpen(true)}>
+        <Placeholder>{placeholder}</Placeholder>
+      </InputBox>
 
       <DrawerDatePicker
         open={open}
         setOpen={setOpen}
         onSubmit={() => console.log("sooss")}
       />
-    </>
+    </Wrapper>
   );
 };
 
