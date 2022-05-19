@@ -14,7 +14,7 @@ import {
 } from "@gorhom/bottom-sheet";
 
 // components
-import { Button } from "../common";
+import Button from "./Button";
 
 // theme
 import { theme } from "../../styles";
@@ -25,8 +25,8 @@ type Props = {
   onSubmit: (date: Date) => void;
 };
 
-function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
-  const [date, setDate] = useState<Date>(new Date("1990-01-01"));
+const DrawerDatePicker = ({ open, setOpen, onSubmit }: Props) => {
+  const [date, setDate] = useState<Date>(new Date("2000-01-01"));
 
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -45,12 +45,7 @@ function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
     bottomSheetModalRef.current?.dismiss();
   }, []);
 
-  useEffect(() => {
-    if (open) handleSheetOpen();
-    setOpen(false);
-  }, [open]);
-
-  // renders
+  // backdrop
   const renderBackdrop = useCallback(
     (props) => (
       <BottomSheetBackdrop
@@ -63,6 +58,15 @@ function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
     ),
     []
   );
+
+  const handleDateChange = (event: Event, date: Date) => {
+    setDate(date);
+  };
+
+  useEffect(() => {
+    if (open) handleSheetOpen();
+    setOpen(false);
+  }, [open]);
 
   return (
     <BottomSheetModal
@@ -79,7 +83,7 @@ function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
           value={date}
           display="spinner"
           mode="date"
-          onChange={(event: any, date: Date) => setDate(date)}
+          onChange={handleDateChange}
         />
         <Button
           variant="contained"
@@ -92,7 +96,7 @@ function DrawerDatePicker({ open, setOpen, onSubmit }: Props) {
       </BottomSheetView>
     </BottomSheetModal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

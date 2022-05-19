@@ -46,10 +46,7 @@ export const {
 export default user.reducer;
 
 export const getProfileInfo = () => async () => {
-  setTimeout(() => {
-    return AsyncStorage.getItem("accessToken").then(async (token) => {
-      if (token) return true;
-      else return false;
-    });
-  }, 500);
+  const token = await AsyncStorage.getItem("accessToken");
+  if (token) return true;
+  else return false;
 };

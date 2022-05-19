@@ -1,7 +1,15 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+
+// hooks
+import { useLoadingContext } from "../../hooks";
+
+// api
+// import { handleLogin } from "../../redux/slices/authSlice";
+import { authApi } from "../../api/auth";
 
 // components
 import { Screen } from "../../components/layout";
@@ -12,10 +20,23 @@ import { Button } from "../../components/common";
 import { theme } from "../../styles";
 
 const Login = ({ navigation }: any) => {
+  const dispatch = useDispatch();
+  const { toggleLoading } = useLoadingContext();
+
   const ValidationSchema = Yup.object().shape({
     email: Yup.string().email("Please insert a valid email address!"),
     password: Yup.string().required("Password is required!"),
   });
+
+  const handleSubmit = async (values: { email: string; password: string }) => {
+    toggleLoading(true);
+    const isLoggedIn: any = await authApi.login(values.email, values.password);
+
+    if (isLoggedIn) {
+      navigation.replace("Main");
+    }
+    toggleLoading(false);
+  };
 
   return (
     <Screen
@@ -34,7 +55,7 @@ const Login = ({ navigation }: any) => {
           }}
           validateOnBlur={true}
           validationSchema={ValidationSchema}
-          onSubmit={(values) => navigation.replace("Main")}
+          onSubmit={(values) => handleSubmit(values)}
         >
           {({ submitForm }) => (
             <>
