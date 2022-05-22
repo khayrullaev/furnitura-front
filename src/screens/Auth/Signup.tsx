@@ -1,15 +1,23 @@
 import React from "react";
 import styled from "styled-components/native";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
+
+// api
+import { authApi } from "../../api/auth";
 
 // components
 import { Screen } from "../../components/layout";
 import { PasswordField, TextField } from "../../components/form";
 import { Button } from "../../components/common";
 
+// context
+import { useLoadingContext } from "../../hooks";
+
 const Signup = ({ navigation }: any) => {
+  const { toggleLoading } = useLoadingContext();
+
   const ValidationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
     email: Yup.string().email("Please insert a valid email address!"),
@@ -19,6 +27,28 @@ const Signup = ({ navigation }: any) => {
       "Passwords do not match!"
     ),
   });
+
+  const handleSignup = async (values: any) => {
+    toggleLoading(true);
+    const success: any = await authApi.signup({
+      ...values,
+    });
+
+    if (success) {
+      Alert.alert(
+        "Singup",
+        "Email has been sent to the entered email. Please verify your email and proceed to login!"
+      );
+      navigation.navigate("Login");
+    } else {
+      Alert.alert(
+        "Singup",
+        "Error occured during your request. Please try again!"
+      );
+      navigation.navigate("Signup");
+    }
+    toggleLoading(false);
+  };
 
   return (
     <Screen
@@ -38,7 +68,7 @@ const Signup = ({ navigation }: any) => {
         }}
         validationSchema={ValidationSchema}
         validateOnBlur={true}
-        onSubmit={(values) => navigation.navigate("SignupInfo", { ...values })}
+        onSubmit={(values) => handleSignup(values)}
       >
         {({ submitForm }) => (
           <FormWrapper>
@@ -52,15 +82,15 @@ const Signup = ({ navigation }: any) => {
               <PasswordField
                 name="password"
                 label="Password"
-                placeholder="6-20  words"
+                placeholder="6-20 characters"
               />
               <PasswordField
                 name="passwordConfirm"
                 label="Repeat Password"
-                placeholder="6-20  words"
+                placeholder="6-20 characters"
               />
             </View>
-            <Button variant="contained" title="Next" onPress={submitForm} />
+            <Button variant="contained" title="Sign up" onPress={submitForm} />
           </FormWrapper>
         )}
       </Formik>

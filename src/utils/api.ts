@@ -1,5 +1,4 @@
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import envs from "../../env";
 import { Alert } from "react-native";
 

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Formik } from "formik";
-import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 
 // hooks
@@ -20,7 +19,6 @@ import { Button } from "../../components/common";
 import { theme } from "../../styles";
 
 const Login = ({ navigation }: any) => {
-  const dispatch = useDispatch();
   const { toggleLoading } = useLoadingContext();
 
   const ValidationSchema = Yup.object().shape({
@@ -67,7 +65,7 @@ const Login = ({ navigation }: any) => {
               <PasswordField
                 name="password"
                 label="Password"
-                placeholder="6-20  words"
+                placeholder="6-20 characters"
               />
               <ForgotButtonWrapper>
                 <Button

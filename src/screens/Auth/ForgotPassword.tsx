@@ -7,21 +7,45 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 // components
 import { Screen } from "../../components/layout";
 import { Button } from "../../components/common";
+import { TextField } from "../../components/form";
 
 // styles
 import { theme } from "../../styles";
 
+// api
+import { authApi } from "../../api/auth";
+
+// hooks
+import { useLoadingContext } from "../../hooks";
+
 const ForgotPassword = ({ navigation }: any) => {
+  const { toggleLoading } = useLoadingContext();
+  const [emailSent, setEmailSent] = useState<boolean>(false);
   const [value, setValue] = useState("");
   const ref = useBlurOnFulfill({ value, cellCount: 4 });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
   });
+
+  const ValidationSchema = Yup.object().shape({
+    email: Yup.string().email("Please insert a valid email address!"),
+  });
+
+  const handleSendEmail = async (email: string) => {
+    toggleLoading(true);
+    const success: any = await authApi.forgotPassword(email);
+    if (success) {
+      setEmailSent(true);
+    }
+    toggleLoading(false);
+  };
 
   return (
     <Screen
@@ -32,52 +56,78 @@ const ForgotPassword = ({ navigation }: any) => {
         justifyContent: "space-between",
       }}
     >
-      <PageWrapper>
-        <View>
-          <InfoTextWrapper>
-            <InfoText>
-              We have sent the login code to your email, please check your mail
-              to confirm your account.
-            </InfoText>
-          </InfoTextWrapper>
+      {emailSent ? (
+        <PageWrapper>
+          <View>
+            <InfoTextWrapper>
+              <InfoText>
+                We have sent the login code to your email, please check your
+                mail to confirm your account.
+              </InfoText>
+            </InfoTextWrapper>
+            <ConfirmationInputWrapper>
+              <CodeField
+                ref={ref}
+                {...props}
+                value={value}
+                onChangeText={setValue}
+                cellCount={4}
+                keyboardType="number-pad"
+                textContentType="oneTimeCode"
+                renderCell={({ index, symbol, isFocused }) => (
+                  <Text
+                    key={index}
+                    style={[styles.cell, isFocused && styles.focusCell]}
+                    onLayout={getCellOnLayoutHandler(index)}
+                  >
+                    {symbol || (isFocused ? <Cursor /> : null)}
+                  </Text>
+                )}
+              />
+            </ConfirmationInputWrapper>
 
-          <ConfirmationInputWrapper>
-            <CodeField
-              ref={ref}
-              {...props}
-              value={value}
-              onChangeText={setValue}
-              cellCount={4}
-              keyboardType="number-pad"
-              textContentType="oneTimeCode"
-              renderCell={({ index, symbol, isFocused }) => (
-                <Text
-                  key={index}
-                  style={[styles.cell, isFocused && styles.focusCell]}
-                  onLayout={getCellOnLayoutHandler(index)}
-                >
-                  {symbol || (isFocused ? <Cursor /> : null)}
-                </Text>
-              )}
-            />
-          </ConfirmationInputWrapper>
-
-          <ResendButtonWrapper>
-            <Button
-              variant="text"
-              title="Resend another code"
-              textButtonSize={14}
-              textButtonColor={theme.blueSemantic}
-              onPress={() => navigation.navigate("ForgotPassword")}
-            />
-          </ResendButtonWrapper>
-        </View>
-        <Button
-          variant="contained"
-          title="Confirm"
-          onPress={() => console.log("value => ", value)}
-        />
-      </PageWrapper>
+            <ResendButtonWrapper>
+              <Button
+                variant="text"
+                title="Resend another code"
+                textButtonSize={14}
+                textButtonColor={theme.blueSemantic}
+                onPress={() => navigation.navigate("ForgotPassword")}
+              />
+            </ResendButtonWrapper>
+          </View>
+          <Button
+            variant="contained"
+            title={"Confirm"}
+            onPress={() => console.log("sss")}
+          />
+        </PageWrapper>
+      ) : (
+        <PageWrapper>
+          <Formik
+            initialValues={{
+              email: "",
+            }}
+            validationSchema={ValidationSchema}
+            onSubmit={(values) => handleSendEmail(values.email)}
+          >
+            {({ submitForm }) => (
+              <>
+                <TextField
+                  name="email"
+                  label="Email"
+                  placeholder="abcdef@gmail.com"
+                />
+                <Button
+                  variant="contained"
+                  title={"Send Verification Code"}
+                  onPress={submitForm}
+                />
+              </>
+            )}
+          </Formik>
+        </PageWrapper>
+      )}
     </Screen>
   );
 };

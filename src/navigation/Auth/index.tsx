@@ -3,13 +3,7 @@ import { Platform } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // screens
-import {
-  Onboarding,
-  Login,
-  ForgotPassword,
-  Signup,
-  SignupInfo,
-} from "../../screens";
+import { Onboarding, Login, ForgotPassword, Signup } from "../../screens";
 
 // types
 import { AuthStackParamList } from "../../types/navigation";
@@ -32,7 +26,6 @@ const Auth = () => {
       <Screen name="Login" component={Login} />
       <Screen name="ForgotPassword" component={ForgotPassword} />
       <Screen name="Signup" component={Signup} />
-      <Screen name="SignupInfo" component={SignupInfo} />
     </Navigator>
   );
 };

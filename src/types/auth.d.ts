@@ -1,7 +1,14 @@
 import { AxiosResponse } from "axios";
 
-export type LoginApiResponse = AxiosResponse<{
+export type AuthApiResponse = AxiosResponse<{
   status: number;
   message: string;
-  data: any;
+  data?: any;
 }>;
+
+export type UserObjectType = {
+  email: string;
+  name: string;
+  password: string;
+  passwordConfirm?: string;
+};
