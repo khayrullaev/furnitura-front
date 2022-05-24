@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, FlatList } from "react-native";
-import { CollectionCard } from "../../../components/common";
 import styled from "styled-components/native";
 // import { FlatList } from "react-native-gesture-handler";
+
+// components
+import { CollectionCard, ProductCard } from "../../../components/common";
 
 // styles
 import { theme } from "../../../styles";
@@ -35,6 +37,15 @@ const Home = ({ navigation }: any) => {
       </CollectionWrapper>
       <ProductWrapper>
         <SectionText withPadding={false}>Popular Products</SectionText>
+        <ProductCard
+          title={"Gray beam"}
+          overview="Tulip chair Table furniture"
+          isSale={false}
+          price={85}
+          src={
+            "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
+          }
+        />
       </ProductWrapper>
       <ProductWrapper>
         <SectionText withPadding={false}>Sale</SectionText>
