@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { Image, StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import { theme } from "../../styles";
+import { HeartIcon, ReportIcon, ShareIcon } from "../svgicons";
 
 type Props = {
-  src?: string;
+  src?: string | undefined;
   title: string;
   overview: string;
   isSale?: boolean;
@@ -23,7 +24,18 @@ const ProductCard = ({
   return (
     <CardWrapper>
       <ImageWrapper>
-        <Image source={{ url: src }} style={{ width: 104, height: 104 }} />
+        <Image source={{ url: src }} style={styles.image} />
+        <IconsWrapper>
+          <Icon activeOpacity={0.8}>
+            <HeartIcon />
+          </Icon>
+          <Icon activeOpacity={0.8}>
+            <ShareIcon />
+          </Icon>
+          <Icon activeOpacity={0.8}>
+            <ReportIcon />
+          </Icon>
+        </IconsWrapper>
       </ImageWrapper>
 
       <InfoWrapper>
@@ -35,6 +47,13 @@ const ProductCard = ({
   );
 };
 
+const styles = StyleSheet.create({
+  image: {
+    width: 104,
+    height: 104,
+  },
+});
+
 const CardWrapper = styled.View`
   width: 156px;
   height: 252px;
@@ -45,7 +64,19 @@ const CardWrapper = styled.View`
 `;
 
 const ImageWrapper = styled.View`
-  /* align-self: center; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 16px;
+`;
+
+const IconsWrapper = styled.View`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Icon = styled.TouchableOpacity`
+  margin-bottom: 12px;
 `;
 
 const InfoWrapper = styled.View`

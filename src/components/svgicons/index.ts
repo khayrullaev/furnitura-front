@@ -8,6 +8,9 @@ import LeftArrow from "./LeftArrow";
 import EyeOn from "./EyeOn";
 import EyeOff from "./EyeOff";
 import AvatarIcon from "./Avatar";
+import HeartIcon from "./Heart";
+import ShareIcon from "./ShareIcon";
+import ReportIcon from "./ReportIcon";
 
 export {
   HomeIcon,
@@ -20,4 +23,7 @@ export {
   EyeOn,
   EyeOff,
   AvatarIcon,
+  HeartIcon,
+  ShareIcon,
+  ReportIcon,
 };

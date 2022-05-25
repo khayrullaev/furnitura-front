@@ -26,7 +26,7 @@ const Home = ({ navigation }: any) => {
   return (
     <PageWrapper>
       <CollectionWrapper>
-        <SectionText withPadding={true}>New Collections</SectionText>
+        <SectionTitle withPadding={true}>New Collections</SectionTitle>
         <FlatList
           horizontal={true}
           keyExtractor={(item) => item.id}
@@ -35,8 +35,11 @@ const Home = ({ navigation }: any) => {
           showsHorizontalScrollIndicator={false}
         />
       </CollectionWrapper>
-      <ProductWrapper>
-        <SectionText withPadding={false}>Popular Products</SectionText>
+      <SectionWrapper>
+        <SectionHeaderWrapper>
+          <SectionTitle withPadding={false}>Popular Products</SectionTitle>
+          <MoreButton>More</MoreButton>
+        </SectionHeaderWrapper>
         <ProductCard
           title={"Gray beam"}
           overview="Tulip chair Table furniture"
@@ -46,10 +49,13 @@ const Home = ({ navigation }: any) => {
             "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
           }
         />
-      </ProductWrapper>
-      <ProductWrapper>
-        <SectionText withPadding={false}>Sale</SectionText>
-      </ProductWrapper>
+      </SectionWrapper>
+      <SectionWrapper>
+        <SectionHeaderWrapper>
+          <SectionTitle withPadding={false}>Popular Products</SectionTitle>
+          <MoreButton>More</MoreButton>
+        </SectionHeaderWrapper>
+      </SectionWrapper>
     </PageWrapper>
   );
 };
@@ -62,7 +68,15 @@ const PageWrapper = styled.View`
 
 const CollectionWrapper = styled.View``;
 
-const SectionText = styled.Text<{ withPadding: boolean }>`
+const SectionHeaderWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: ${theme.neutral1};
+`;
+
+const SectionTitle = styled.Text<{ withPadding: boolean }>`
   font-family: ${theme.fonts.semiBold};
   font-weight: 600;
   font-size: 18px;
@@ -71,8 +85,16 @@ const SectionText = styled.Text<{ withPadding: boolean }>`
   padding-left: ${(props) => (props.withPadding ? "24px" : 0)};
 `;
 
-const ProductWrapper = styled.View`
-  padding: 20px 24px;
+const MoreButton = styled.Text`
+  font-family: ${theme.fonts.semiBold};
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${theme.primary};
+`;
+
+const SectionWrapper = styled.View`
+  padding: 20px 24px 0 24px;
 `;
 
 export default Home;
