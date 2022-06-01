@@ -1,7 +1,11 @@
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 import styled from "styled-components/native";
+
+// styles
 import { theme } from "../../styles";
+
+// assets
 import { HeartIcon, ReportIcon, ShareIcon } from "../svgicons";
 
 type Props = {

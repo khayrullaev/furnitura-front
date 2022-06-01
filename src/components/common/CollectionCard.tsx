@@ -13,7 +13,7 @@ const CollectionCard = ({ url, onPress }: Props) => {
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={() => console.log("clicked")}
-      style={{ marginLeft: 16 }}
+      style={{ marginRight: 16 }}
     >
       <Image
         source={{

@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, FlatList } from "react-native";
+import { StyleSheet, FlatList, Pressable } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
-// import { FlatList } from "react-native-gesture-handler";
 
 // components
 import { CollectionCard, ProductCard } from "../../../components/common";
@@ -25,55 +25,114 @@ const HOME_DATA = {
 const Home = ({ navigation }: any) => {
   return (
     <PageWrapper>
-      <CollectionWrapper>
-        <SectionTitle withPadding={true}>New Collections</SectionTitle>
-        <FlatList
-          horizontal={true}
-          keyExtractor={(item) => item.id}
-          data={HOME_DATA.collections}
-          renderItem={({ item }) => <CollectionCard url={item.url} />}
-          showsHorizontalScrollIndicator={false}
-        />
-      </CollectionWrapper>
-      <SectionWrapper>
-        <SectionHeaderWrapper>
-          <SectionTitle withPadding={false}>Popular Products</SectionTitle>
-          <MoreButton>More</MoreButton>
-        </SectionHeaderWrapper>
-        <ProductCard
-          title={"Gray beam"}
-          overview="Tulip chair Table furniture"
-          isSale={false}
-          price={85}
-          src={
-            "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
-          }
-        />
-      </SectionWrapper>
-      <SectionWrapper>
-        <SectionHeaderWrapper>
-          <SectionTitle withPadding={false}>Popular Products</SectionTitle>
-          <MoreButton>More</MoreButton>
-        </SectionHeaderWrapper>
-      </SectionWrapper>
+      <ScrollView>
+        <CollectionWrapper>
+          <SectionTitle withPadding={true}>New Collections</SectionTitle>
+          <FlatList
+            style={styles.flatlist}
+            horizontal={true}
+            keyExtractor={(item) => item.id}
+            data={HOME_DATA.collections}
+            renderItem={({ item }) => <CollectionCard url={item.url} />}
+            showsHorizontalScrollIndicator={false}
+          />
+        </CollectionWrapper>
+
+        <SectionWrapper>
+          <SectionHeaderWrapper>
+            <SectionTitle withPadding={false}>Popular Products</SectionTitle>
+            <Pressable>
+              <MoreButton>More</MoreButton>
+            </Pressable>
+          </SectionHeaderWrapper>
+          <SectionItemsWrapper>
+            <ProductCard
+              title={"Gray beam"}
+              overview="Tulip chair Table furniture"
+              isSale={false}
+              price={85}
+              src={
+                "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
+              }
+            />
+            <ProductCard
+              title={"Gray beam"}
+              overview="Tulip chair Table furniture"
+              isSale={false}
+              price={85}
+              src={
+                "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
+              }
+            />
+          </SectionItemsWrapper>
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SectionHeaderWrapper>
+            <SectionTitle withPadding={false}>Sale Products</SectionTitle>
+            <Pressable>
+              <MoreButton>More</MoreButton>
+            </Pressable>
+          </SectionHeaderWrapper>
+          <SectionItemsWrapper>
+            <ProductCard
+              title={"Gray beam"}
+              overview="Tulip chair Table furniture"
+              isSale={false}
+              price={85}
+              src={
+                "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
+              }
+            />
+            <ProductCard
+              title={"Gray beam"}
+              overview="Tulip chair Table furniture"
+              isSale={false}
+              price={85}
+              src={
+                "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
+              }
+            />
+          </SectionItemsWrapper>
+        </SectionWrapper>
+      </ScrollView>
     </PageWrapper>
   );
 };
 
+const styles = StyleSheet.create({
+  flatlist: {
+    display: "flex",
+    paddingLeft: 24,
+  },
+});
+
 const PageWrapper = styled.View`
   width: 100%;
   height: 100%;
-  padding: 24px 0;
+  flex: 1;
 `;
 
-const CollectionWrapper = styled.View``;
+const CollectionWrapper = styled.View`
+  margin-top: 24px;
+`;
+
+const SectionWrapper = styled.View`
+  margin-top: 20px;
+  padding: 0 24px;
+`;
 
 const SectionHeaderWrapper = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* align-items: center; */
   color: ${theme.neutral1};
+`;
+
+const SectionItemsWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const SectionTitle = styled.Text<{ withPadding: boolean }>`
@@ -91,10 +150,7 @@ const MoreButton = styled.Text`
   font-size: 12px;
   line-height: 18px;
   color: ${theme.primary};
-`;
-
-const SectionWrapper = styled.View`
-  padding: 20px 24px 0 24px;
+  padding-top: 6px;
 `;
 
 export default Home;
