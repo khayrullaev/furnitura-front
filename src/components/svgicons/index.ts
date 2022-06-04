@@ -11,6 +11,11 @@ import AvatarIcon from "./Avatar";
 import HeartIcon from "./Heart";
 import ShareIcon from "./ShareIcon";
 import ReportIcon from "./ReportIcon";
+import CategoryBed from "./CategoryBed";
+import CategoryLamp from "./CategoryLamp";
+import CategoryChair from "./CategoryChair";
+import CategoryTable from "./CategoryTable";
+import CategoryBath from "./CategoryBath";
 
 export {
   HomeIcon,
@@ -26,4 +31,9 @@ export {
   HeartIcon,
   ShareIcon,
   ReportIcon,
+  CategoryBed,
+  CategoryLamp,
+  CategoryChair,
+  CategoryTable,
+  CategoryBath,
 };
