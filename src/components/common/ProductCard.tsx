@@ -9,6 +9,7 @@ import { theme } from "../../styles";
 import { HeartIcon, ReportIcon, ShareIcon } from "../svgicons";
 
 type Props = {
+  id?: number;
   src?: string | undefined;
   title: string;
   overview: string;
@@ -18,6 +19,7 @@ type Props = {
 };
 
 const ProductCard = ({
+  id,
   src,
   title,
   overview,
