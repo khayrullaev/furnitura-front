@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
   },
   flatlistContainer: {
-    paddingBottom: 200,
+    paddingBottom: 140,
   },
 });
 

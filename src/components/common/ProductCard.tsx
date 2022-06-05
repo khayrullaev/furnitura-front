@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 
 // styles
@@ -27,29 +28,46 @@ const ProductCard = ({
   price,
   salePrice,
 }: Props) => {
-  return (
-    <CardWrapper>
-      <ImageWrapper>
-        <Image source={{ url: src }} style={styles.image} />
-        <IconsWrapper>
-          <Icon activeOpacity={0.8}>
-            <HeartIcon />
-          </Icon>
-          <Icon activeOpacity={0.8}>
-            <ShareIcon />
-          </Icon>
-          <Icon activeOpacity={0.8}>
-            <ReportIcon />
-          </Icon>
-        </IconsWrapper>
-      </ImageWrapper>
+  const navigation = useNavigation();
 
-      <InfoWrapper>
-        <Title>{title}</Title>
-        <Overview>{overview}</Overview>
-        <Price>{`$${price}`}</Price>
-      </InfoWrapper>
-    </CardWrapper>
+  return (
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() =>
+        navigation.navigate("ProductDetail", {
+          id,
+          src,
+          title,
+          overview,
+          isSale,
+          price,
+          salePrice,
+        })
+      }
+    >
+      <CardWrapper>
+        <ImageWrapper>
+          <Image source={{ url: src }} style={styles.image} />
+          <IconsWrapper>
+            <Icon activeOpacity={0.8} onPress={() => console.log("heart")}>
+              <HeartIcon />
+            </Icon>
+            <Icon activeOpacity={0.8}>
+              <ShareIcon />
+            </Icon>
+            <Icon activeOpacity={0.8}>
+              <ReportIcon />
+            </Icon>
+          </IconsWrapper>
+        </ImageWrapper>
+
+        <InfoWrapper>
+          <Title>{title}</Title>
+          <Overview>{overview}</Overview>
+          <Price>{`$${price}`}</Price>
+        </InfoWrapper>
+      </CardWrapper>
+    </TouchableOpacity>
   );
 };
 
