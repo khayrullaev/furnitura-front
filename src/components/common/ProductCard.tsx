@@ -3,6 +3,9 @@ import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 
+// components
+import Block from "./Block";
+
 // styles
 import { theme } from "../../styles";
 
@@ -14,7 +17,7 @@ type Props = {
   src?: string | undefined;
   title: string;
   overview: string;
-  isSale?: boolean;
+  isSale: boolean;
   price: number;
   salePrice?: number;
 };
@@ -35,13 +38,7 @@ const ProductCard = ({
       activeOpacity={0.8}
       onPress={() =>
         navigation.navigate("ProductDetail", {
-          id,
-          src,
-          title,
-          overview,
-          isSale,
-          price,
-          salePrice,
+          details: { id, src, title, overview, isSale, price, salePrice },
         })
       }
     >
@@ -64,7 +61,10 @@ const ProductCard = ({
         <InfoWrapper>
           <Title>{title}</Title>
           <Overview>{overview}</Overview>
-          <Price>{`$${price}`}</Price>
+          <Block flexDirection="row">
+            {isSale && <SalePrice>{`$${salePrice}`}</SalePrice>}
+            <Price>{`$${price}`}</Price>
+          </Block>
         </InfoWrapper>
       </CardWrapper>
     </TouchableOpacity>
@@ -122,6 +122,16 @@ const Overview = styled.Text`
   line-height: 20px;
   color: ${theme.neutral3};
   margin-bottom: 8px;
+`;
+
+const SalePrice = styled.Text`
+  font-family: ${theme.fonts.semiBold};
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: line-through;
+  text-decoration-color: ${theme.neutral4};
+  color: ${theme.neutral4};
+  margin-right: 6px;
 `;
 
 const Price = styled.Text`

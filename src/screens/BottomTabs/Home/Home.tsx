@@ -49,8 +49,9 @@ const Home = ({ navigation }: any) => {
             <ProductCard
               title={"Gray beam"}
               overview="Tulip chair Table furniture"
-              isSale={false}
-              price={85}
+              isSale={true}
+              salePrice={89}
+              price={61}
               src={
                 "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
               }

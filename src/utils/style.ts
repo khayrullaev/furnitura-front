@@ -1,5 +1,19 @@
 import { ViewStyle } from "react-native";
 
+export const sizes = {
+  text: {
+    h1: 25,
+    xl: 21,
+    lg: 18,
+    md: 16,
+    sm: 14,
+    xs: 12,
+  },
+  padding: 24,
+  margin: 24,
+  radius: 12,
+};
+
 export type SizeType = "h1" | "xl" | "lg" | "md" | "sm" | "xs";
 
 export type fontWeightType =

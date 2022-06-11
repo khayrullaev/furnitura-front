@@ -1,3 +1,4 @@
+import CommonText from "./Text";
 import Block from "./Block";
 import Button from "./Button";
 import IconButton from "./IconButton";
@@ -12,4 +13,5 @@ export {
   DrawerDatePicker,
   CollectionCard,
   Block,
+  CommonText,
 };
