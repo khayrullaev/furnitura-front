@@ -48,7 +48,8 @@ const Home = ({ navigation }: any) => {
           <SectionItemsWrapper>
             <ProductCard
               title={"Gray beam"}
-              overview="Tulip chair Table furniture"
+              overview="The Cloud Collection recalls the peaceful and close memories of Vietnamese souls for a slow way of life to enjoy in the midst of modern life. As the name implies, the collection is inspired by rattan material."
+              description={`Rattan Armchair Chair with modern beauty, combining leather, ash and rattan. The design is exquisite and stands out by the curvature of the handrails in gentle and approachable colors.\nMay - Viet Spirit in the modern breath`}
               isSale={true}
               salePrice={89}
               price={61}

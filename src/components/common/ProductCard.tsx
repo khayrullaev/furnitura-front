@@ -16,7 +16,8 @@ type Props = {
   id?: number;
   src?: string | undefined;
   title: string;
-  overview: string;
+  overview?: string;
+  description?: string;
   isSale: boolean;
   price: number;
   salePrice?: number;
@@ -27,6 +28,7 @@ const ProductCard = ({
   src,
   title,
   overview,
+  description,
   isSale = false,
   price,
   salePrice,
@@ -38,7 +40,16 @@ const ProductCard = ({
       activeOpacity={0.8}
       onPress={() =>
         navigation.navigate("ProductDetail", {
-          details: { id, src, title, overview, isSale, price, salePrice },
+          details: {
+            id,
+            src,
+            title,
+            overview,
+            description,
+            isSale,
+            price,
+            salePrice,
+          },
         })
       }
     >
@@ -60,7 +71,7 @@ const ProductCard = ({
 
         <InfoWrapper>
           <Title>{title}</Title>
-          <Overview>{overview}</Overview>
+          <Overview numberOfLines={2}>{overview}</Overview>
           <Block flexDirection="row">
             {isSale && <SalePrice>{`$${salePrice}`}</SalePrice>}
             <Price>{`$${price}`}</Price>

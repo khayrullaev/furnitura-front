@@ -133,9 +133,21 @@ const ProductDetail = ({ navigation, route }: any) => {
             lineHeight={24}
             textAlign="left"
             color={theme.neutral2}
-          >{`The Cloud Collection recalls the peaceful and close memories of Vietnamese souls for a slow way of life to enjoy in the midst of modern life. As the name implies, the collection is inspired by rattan materi.`}</CommonText>
+          >
+            {details.overview}
+          </CommonText>
         )}
-        {tab === 1 && <CommonText>{details.description}</CommonText>}
+        {tab === 1 && (
+          <CommonText
+            fontFamily={theme.fonts.medium}
+            size={14}
+            lineHeight={24}
+            textAlign="left"
+            color={theme.neutral2}
+          >
+            {details.description}
+          </CommonText>
+        )}
         {tab === 2 && <CommonText>Review</CommonText>}
       </View>
     </SafeAreaView>
