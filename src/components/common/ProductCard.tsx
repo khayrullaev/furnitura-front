@@ -14,7 +14,7 @@ import { HeartIcon, ReportIcon, ShareIcon } from "../svgicons";
 
 type Props = {
   id?: number;
-  src?: string | undefined;
+  imageUrl?: string | undefined;
   title: string;
   overview?: string;
   description?: string;
@@ -25,7 +25,7 @@ type Props = {
 
 const ProductCard = ({
   id,
-  src,
+  imageUrl,
   title,
   overview,
   description,
@@ -42,7 +42,7 @@ const ProductCard = ({
         navigation.navigate("ProductDetail", {
           details: {
             id,
-            src,
+            imageUrl,
             title,
             overview,
             description,
@@ -55,7 +55,7 @@ const ProductCard = ({
     >
       <CardWrapper>
         <ImageWrapper>
-          <Image source={{ url: src }} style={styles.image} />
+          <Image source={{ url: imageUrl }} style={styles.image} />
           <IconsWrapper>
             <Icon activeOpacity={0.8} onPress={() => console.log("heart")}>
               <HeartIcon />

@@ -37,17 +37,6 @@ const ProductDetail = ({ navigation, route }: any) => {
   const [tab, setTab] = useState<number>(0);
   const { details } = route.params;
 
-  const TabContents = () => {
-    console.log(tab);
-    if (tab === 0) {
-      return <CommonText>{details.overview}</CommonText>;
-    } else if (tab === 1) {
-      return <CommonText>{details.description}</CommonText>;
-    } else {
-      return <CommonText>Reviews list</CommonText>;
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <Block
@@ -61,7 +50,7 @@ const ProductDetail = ({ navigation, route }: any) => {
         <Block justifyContent="center" alignItems="center">
           <Image
             style={{ width: 250, height: 250 }}
-            source={{ url: details.src }}
+            source={{ url: details.imageUrl }}
           />
         </Block>
 

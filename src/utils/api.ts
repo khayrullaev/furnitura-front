@@ -15,6 +15,7 @@ export const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.log("error => ", error);
     const { data, status } = error.response;
     if (
       status === 400 ||

@@ -1,7 +1,6 @@
 import { api } from "../utils";
 import { AuthApiResponse, UserObjectType } from "../types/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StringLocale } from "yup/lib/locale";
 
 const login = async (email: string, password: string) => {
   try {

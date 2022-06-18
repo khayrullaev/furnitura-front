@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { api } from "../../utils";
 
 interface UserSlice {
   userData: Object;
@@ -47,6 +48,8 @@ export default user.reducer;
 
 export const getProfileInfo = () => async () => {
   const token = await AsyncStorage.getItem("accessToken");
-  if (token) return true;
-  else return false;
+  if (token) {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    return true;
+  } else return false;
 };

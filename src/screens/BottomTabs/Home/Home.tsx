@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, Pressable } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 
+// api
+import { homeApi } from "../../../api/home";
+
 // components
 import { CollectionCard, ProductCard } from "../../../components/common";
+
+// hooks
+import { useLoadingContext } from "../../../hooks";
 
 // styles
 import { theme } from "../../../styles";
 
-const HOME_DATA = {
-  collections: [
-    {
-      id: 1,
-      url: "https://res.cloudinary.com/dd4vsoahe/image/upload/v1653205673/furnitura/collections/pexels-max-vakhtbovych-6492397_mqxygh.jpg",
-    },
-    {
-      id: 2,
-      url: "https://res.cloudinary.com/dd4vsoahe/image/upload/v1653205643/furnitura/collections/pexels-pixabay-271816_yhu1n8.jpg",
-    },
-  ],
-};
+const Home = () => {
+  const [data, setData] = useState<any>({});
+  const { toggleLoading } = useLoadingContext();
 
-const Home = ({ navigation }: any) => {
+  const fetchHomeProducts = async () => {
+    toggleLoading(true);
+    const res: any = await homeApi.getHomeProducts();
+    setData(res.data);
+    toggleLoading(false);
+  };
+
+  useEffect(() => {
+    fetchHomeProducts();
+  }, []);
+
   return (
     <PageWrapper>
       <ScrollView>
@@ -32,7 +39,7 @@ const Home = ({ navigation }: any) => {
             style={styles.flatlist}
             horizontal={true}
             keyExtractor={(item) => item.id}
-            data={HOME_DATA.collections}
+            data={data?.collections}
             renderItem={({ item }) => <CollectionCard url={item.url} />}
             showsHorizontalScrollIndicator={false}
           />
@@ -46,26 +53,9 @@ const Home = ({ navigation }: any) => {
             </Pressable>
           </SectionHeaderWrapper>
           <SectionItemsWrapper>
-            <ProductCard
-              title={"Gray beam"}
-              overview="The Cloud Collection recalls the peaceful and close memories of Vietnamese souls for a slow way of life to enjoy in the midst of modern life. As the name implies, the collection is inspired by rattan material."
-              description={`Rattan Armchair Chair with modern beauty, combining leather, ash and rattan. The design is exquisite and stands out by the curvature of the handrails in gentle and approachable colors.\nMay - Viet Spirit in the modern breath`}
-              isSale={true}
-              salePrice={89}
-              price={61}
-              src={
-                "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
-              }
-            />
-            <ProductCard
-              title={"Gray beam"}
-              overview="Tulip chair Table furniture"
-              isSale={false}
-              price={85}
-              src={
-                "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
-              }
-            />
+            {data?.popularProducts?.map((product: any, index: number) => {
+              return <ProductCard {...product} key={index} />;
+            })}
           </SectionItemsWrapper>
         </SectionWrapper>
 
@@ -77,24 +67,9 @@ const Home = ({ navigation }: any) => {
             </Pressable>
           </SectionHeaderWrapper>
           <SectionItemsWrapper>
-            <ProductCard
-              title={"Gray beam"}
-              overview="Tulip chair Table furniture"
-              isSale={false}
-              price={85}
-              src={
-                "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
-              }
-            />
-            <ProductCard
-              title={"Gray beam"}
-              overview="Tulip chair Table furniture"
-              isSale={false}
-              price={85}
-              src={
-                "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png"
-              }
-            />
+            {data?.saleProducts?.map((product: any, index: number) => {
+              return <ProductCard {...product} key={index} />;
+            })}
           </SectionItemsWrapper>
         </SectionWrapper>
       </ScrollView>
