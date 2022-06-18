@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Image, Pressable } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
@@ -128,7 +128,7 @@ const ProductDetail = ({ navigation, route }: any) => {
             textAlign="left"
             color={theme.neutral2}
           >
-            {details.overview}
+            {details.description}
           </CommonText>
         )}
         {tab === 1 && (
@@ -140,7 +140,7 @@ const ProductDetail = ({ navigation, route }: any) => {
               textAlign="left"
               color={theme.neutral2}
             >
-              {details.description}
+              {details.overview}
             </CommonText>
             <CommonText
               fontFamily={theme.fonts.semiBold}
@@ -150,16 +150,57 @@ const ProductDetail = ({ navigation, route }: any) => {
             >
               Information
             </CommonText>
+
+            <Block
+              flexDirection="row"
+              justifyContent="space-between"
+              style={{ marginTop: 16 }}
+            >
+              <CommonText>Material</CommonText>
+              <CommonText style={{ width: 200 }} numberOfLines={1}>
+                {details.information?.material}
+              </CommonText>
+            </Block>
+            <Block
+              flexDirection="row"
+              justifyContent="space-between"
+              style={{ marginTop: 16 }}
+            >
+              <CommonText>Size</CommonText>
+              <CommonText>{details.information?.size}</CommonText>
+            </Block>
+            <Block
+              flexDirection="row"
+              justifyContent="space-between"
+              style={{ marginTop: 16 }}
+            >
+              <CommonText>Colors</CommonText>
+              <Block flexDirection="row">
+                {details.information?.colors.map(
+                  (color: string, index: number) => {
+                    return (
+                      <View
+                        key={index}
+                        style={[
+                          styles.colors,
+                          { backgroundColor: "#" + color },
+                        ]}
+                      />
+                    );
+                  }
+                )}
+              </Block>
+            </Block>
           </>
         )}
         {tab === 2 && <CommonText>Review</CommonText>}
-        <View style={styles.bottomButton}>
-          <Button
-            title="Add to bag"
-            variant="contained"
-            onPress={() => console.log("handle add to bag")}
-          />
-        </View>
+      </View>
+      <View style={styles.bottomButton}>
+        <Button
+          title="Add to bag"
+          variant="contained"
+          onPress={() => console.log("handle add to bag")}
+        />
       </View>
     </SafeAreaView>
   );
@@ -199,14 +240,21 @@ const styles = StyleSheet.create({
 
   bottomButton: {
     width: "100%",
+    paddingHorizontal: 24,
     left: 0,
     right: 0,
-    top: 0,
-    bottom: 30,
+    bottom: 35,
     position: "absolute",
     display: "flex",
     justifyContent: "center",
-    // backgroundColor: "red",
+    backgroundColor: theme.neutral5,
+  },
+
+  colors: {
+    width: 20,
+    height: 20,
+    borderRadius: 50,
+    marginLeft: 8,
   },
 });
 

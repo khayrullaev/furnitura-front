@@ -21,6 +21,7 @@ type Props = {
   isSale: boolean;
   price: number;
   salePrice?: number;
+  information?: object;
 };
 
 const ProductCard = ({
@@ -29,6 +30,7 @@ const ProductCard = ({
   title,
   overview,
   description,
+  information,
   isSale = false,
   price,
   salePrice,
@@ -49,6 +51,7 @@ const ProductCard = ({
             isSale,
             price,
             salePrice,
+            information,
           },
         })
       }
