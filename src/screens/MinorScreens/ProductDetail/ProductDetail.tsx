@@ -5,7 +5,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
 // components
-import { Block, CommonText, IconButton } from "../../../components/common";
+import {
+  Block,
+  Button,
+  CommonText,
+  IconButton,
+} from "../../../components/common";
 
 // assets
 import {
@@ -127,17 +132,34 @@ const ProductDetail = ({ navigation, route }: any) => {
           </CommonText>
         )}
         {tab === 1 && (
-          <CommonText
-            fontFamily={theme.fonts.medium}
-            size={14}
-            lineHeight={24}
-            textAlign="left"
-            color={theme.neutral2}
-          >
-            {details.description}
-          </CommonText>
+          <>
+            <CommonText
+              fontFamily={theme.fonts.medium}
+              size={14}
+              lineHeight={24}
+              textAlign="left"
+              color={theme.neutral2}
+            >
+              {details.description}
+            </CommonText>
+            <CommonText
+              fontFamily={theme.fonts.semiBold}
+              size={16}
+              lineHeight={24}
+              style={{ marginTop: 20 }}
+            >
+              Information
+            </CommonText>
+          </>
         )}
         {tab === 2 && <CommonText>Review</CommonText>}
+        <View style={styles.bottomButton}>
+          <Button
+            title="Add to bag"
+            variant="contained"
+            onPress={() => console.log("handle add to bag")}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -173,6 +195,18 @@ const styles = StyleSheet.create({
 
   tabItem: {
     borderRadius: 15,
+  },
+
+  bottomButton: {
+    width: "100%",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 30,
+    position: "absolute",
+    display: "flex",
+    justifyContent: "center",
+    // backgroundColor: "red",
   },
 });
 
