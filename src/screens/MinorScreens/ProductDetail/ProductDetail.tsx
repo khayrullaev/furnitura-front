@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Image, Pressable } from "react-native";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 

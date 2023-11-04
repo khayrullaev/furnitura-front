@@ -128,6 +128,8 @@ const Title = styled.Text`
   line-height: 24px;
   color: ${theme.neutral1};
   margin-bottom: 4px;
+  overflow: hidden;
+  text-align: left;
 `;
 
 const Overview = styled.Text`

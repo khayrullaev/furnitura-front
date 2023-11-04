@@ -57,7 +57,9 @@ const CategorySelect = ({ category, setCategory }: Props) => {
       contentContainerStyle={styles.flatlistContainer}
       data={CATEGORIES}
       renderItem={({ item }) => (
-        <Pressable onPress={() => setCategory(item.type)}>
+        <Pressable
+          onPress={() => setCategory(category === item.type ? "" : item.type)}
+        >
           <Circle style={styles.circle} active={item.type === category}>
             {item.icon}
           </Circle>
