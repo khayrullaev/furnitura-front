@@ -16,6 +16,7 @@ import { loadFonts } from "./src/utils";
 
 // redux
 import { persistor, store } from "./src/redux/store";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
