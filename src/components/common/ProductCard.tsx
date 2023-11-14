@@ -13,7 +13,7 @@ import { theme } from "../../styles";
 import { HeartIcon, ReportIcon, ShareIcon } from "../svgicons";
 
 type Props = {
-  id?: number;
+  _id?: string;
   imageUrl?: string | undefined;
   title: string;
   overview?: string;
@@ -25,7 +25,7 @@ type Props = {
 };
 
 const ProductCard = ({
-  id,
+  _id,
   imageUrl,
   title,
   overview,
@@ -43,7 +43,7 @@ const ProductCard = ({
       onPress={() =>
         navigation.navigate("ProductDetail", {
           details: {
-            id,
+            _id,
             imageUrl,
             title,
             overview,

@@ -1,6 +1,7 @@
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
+import { useSelector } from "react-redux";
 
 // components
 import { CartItem } from "../../../components/cart";
@@ -10,13 +11,20 @@ import { Block, Button, CommonText } from "../../../components/common";
 import { theme } from "../../../styles";
 
 const Cart = () => {
+  const { cartItems } = useSelector((state: any) => state.cart);
+
+  console.log(cartItems);
+
+  const total = Array.isArray(cartItems)
+    ? cartItems.reduce((prev, curr) => prev + curr.price * curr.quantity, 0)
+    : 0;
+
   return (
     <PageWrapper>
       <ScrollView style={{ padding: 24 }}>
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
+        {cartItems?.map((item: any) => (
+          <CartItem product={item} />
+        ))}
       </ScrollView>
 
       {1 > 0 && (
@@ -42,13 +50,14 @@ const Cart = () => {
               size={24}
               color={theme.primary}
             >
-              ${1920}
+              ${total}
             </CommonText>
           </Block>
           <Button
             variant="contained"
             buttonStyle={{ marginBottom: 20 }}
             title="Payment"
+            onPress={() => {}}
           />
         </Block>
       )}

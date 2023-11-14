@@ -29,6 +29,8 @@ const Store = ({ navigation }: any) => {
     fetchHomeProducts();
   }, [category]);
 
+  console.log(data?.products);
+
   return (
     <PageWrapper>
       <CategorySelect category={category} setCategory={setCategory} />
@@ -40,7 +42,7 @@ const Store = ({ navigation }: any) => {
         keyExtractor={(item) => item._id}
         contentContainerStyle={styles.flatlistContainer}
         data={data.products}
-        renderItem={({ item, index }) => {
+        renderItem={({ item }) => {
           return (
             <ProductCardWrapper>
               <ProductCard {...item} />

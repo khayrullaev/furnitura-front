@@ -15,7 +15,7 @@ import { theme } from "../../styles";
 import PlusIcon from "../svgicons/Plus";
 import MinusIcon from "../svgicons/Minus";
 
-const CartItem = () => {
+const CartItem = ({ product }: any) => {
   return (
     <GestureHandlerRootView>
       <Swipeable
@@ -31,7 +31,7 @@ const CartItem = () => {
           >
             <Image
               source={{
-                url: "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329678/furnitura/products/pngwing_1-7_dugmbz.png",
+                url: product?.imageUrl,
               }}
               style={styles.image}
             />
@@ -45,7 +45,7 @@ const CartItem = () => {
                 color={theme.neutral1}
                 mb={4}
               >
-                Pendant
+                {product?.title}
               </CommonText>
               <CommonText
                 fontFamily={theme.fonts.medium}
@@ -53,11 +53,14 @@ const CartItem = () => {
                 fontWeight={"500"}
                 lineHeight={24}
                 color={theme.neutral2}
+                numberOfLines={1}
                 mb={8}
               >
-                Drop Ceiling
+                {product?.overview}
               </CommonText>
-              <Price>$40</Price>
+              <Price>
+                ${product?.isSale ? product?.salePrice : product?.price}
+              </Price>
             </Block>
 
             <Block
@@ -70,7 +73,7 @@ const CartItem = () => {
                 <PlusIcon />
               </TouchableOpacity>
               <CommonText size={16} lineHeight={24} fontWeight="500">
-                3
+                {product?.quantity}
               </CommonText>
               <TouchableOpacity>
                 <MinusIcon />
