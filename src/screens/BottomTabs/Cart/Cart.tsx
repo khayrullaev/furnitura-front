@@ -13,8 +13,6 @@ import { theme } from "../../../styles";
 const Cart = () => {
   const { cartItems } = useSelector((state: any) => state.cart);
 
-  console.log(cartItems);
-
   const total = Array.isArray(cartItems)
     ? cartItems.reduce((prev, curr) => prev + curr.price * curr.quantity, 0)
     : 0;

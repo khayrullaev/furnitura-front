@@ -3,6 +3,8 @@ import styled from "styled-components/native";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { useDispatch } from "react-redux";
+import { decrement, increment } from "../../redux/slices/cartSlice";
 
 // components
 import { Block, CommonText } from "../common";
@@ -16,6 +18,16 @@ import PlusIcon from "../svgicons/Plus";
 import MinusIcon from "../svgicons/Minus";
 
 const CartItem = ({ product }: any) => {
+  const dispatch = useDispatch();
+
+  const onIncrease = () => {
+    dispatch(increment(product?._id));
+  };
+
+  const onDecrease = () => {
+    dispatch(decrement(product?._id));
+  };
+
   return (
     <GestureHandlerRootView>
       <Swipeable
@@ -69,13 +81,13 @@ const CartItem = ({ product }: any) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onIncrease}>
                 <PlusIcon />
               </TouchableOpacity>
               <CommonText size={16} lineHeight={24} fontWeight="500">
                 {product?.quantity}
               </CommonText>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onDecrease}>
                 <MinusIcon />
               </TouchableOpacity>
             </Block>
