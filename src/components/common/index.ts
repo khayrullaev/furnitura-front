@@ -5,6 +5,7 @@ import IconButton from "./IconButton";
 import ProductCard from "./ProductCard";
 import DrawerDatePicker from "./DrawerDatePicker";
 import CollectionCard from "./CollectionCard";
+import NewsScreenCollectionCard from "./NewsScreenCollectionCard";
 
 export {
   Button,
@@ -14,4 +15,5 @@ export {
   CollectionCard,
   Block,
   CommonText,
+  NewsScreenCollectionCard,
 };

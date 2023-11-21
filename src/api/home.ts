@@ -7,6 +7,7 @@ const getHomeProducts = async () => {
     return data;
   } catch (error) {
     console.log("Home -> ", error);
+    return {};
   }
 };
 

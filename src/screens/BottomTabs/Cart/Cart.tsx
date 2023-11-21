@@ -36,14 +36,14 @@ const Cart = () => {
           >
             <CommonText
               size={18}
-              fontFamily="semiBold"
+              fontFamily={theme.fonts.semiBold}
               fontWeight={"700"}
               color={theme.neutral2}
             >
               Total
             </CommonText>
             <CommonText
-              fontFamily="Bold"
+              fontFamily={theme.fonts.bold}
               fontWeight={"700"}
               size={24}
               color={theme.primary}
