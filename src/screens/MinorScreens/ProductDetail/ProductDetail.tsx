@@ -103,15 +103,28 @@ const ProductDetail = ({ navigation, route }: any) => {
           alignItems="center"
           style={{ marginTop: 12, marginBottom: 20 }}
         >
-          {details.isSale && <SalePrice>{`$${details.salePrice}`}</SalePrice>}
-          <CommonText
-            fontFamily={theme.fonts.bold}
-            size={18}
-            lineHeight={28}
-            color={theme.primary}
-          >
-            {`$${details.price}`}
-          </CommonText>
+          {details.isSale ? (
+            <>
+              <SalePrice>{`$${details.price}`}</SalePrice>
+              <CommonText
+                fontFamily={theme.fonts.bold}
+                size={18}
+                lineHeight={28}
+                color={theme.primary}
+              >
+                {`$${details.salePrice}`}
+              </CommonText>
+            </>
+          ) : (
+            <CommonText
+              fontFamily={theme.fonts.bold}
+              size={18}
+              lineHeight={28}
+              color={theme.primary}
+            >
+              {`$${details.price}`}
+            </CommonText>
+          )}
         </Block>
 
         <Block

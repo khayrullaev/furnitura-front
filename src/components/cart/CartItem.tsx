@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components/native";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { useDispatch } from "react-redux";
-import { decrement, increment } from "../../redux/slices/cartSlice";
+import { decrement, increment, removeItem } from "../../redux/slices/cartSlice";
 
 // components
 import { Block, CommonText } from "../common";
@@ -20,18 +20,16 @@ import MinusIcon from "../svgicons/Minus";
 const CartItem = ({ product }: any) => {
   const dispatch = useDispatch();
 
-  const onIncrease = () => {
-    dispatch(increment(product?._id));
-  };
+  const onIncrease = useCallback(() => dispatch(increment(product?._id)), []);
 
-  const onDecrease = () => {
-    dispatch(decrement(product?._id));
-  };
+  const onDecrease = useCallback(() => dispatch(decrement(product?._id)), []);
+
+  const onDelete = useCallback(() => dispatch(removeItem(product?._id)), []);
 
   return (
     <GestureHandlerRootView>
       <Swipeable
-        renderRightActions={() => <CartItemDeleteAction />}
+        renderRightActions={() => <CartItemDeleteAction onPress={onDelete} />}
         containerStyle={styles.swipeable}
       >
         <Wrapper>
@@ -70,9 +68,17 @@ const CartItem = ({ product }: any) => {
               >
                 {product?.overview}
               </CommonText>
-              <Price>
-                ${product?.isSale ? product?.salePrice : product?.price}
-              </Price>
+
+              <Block flex flexDirection="row">
+                {product?.isSale ? (
+                  <>
+                    <SalePrice>${product?.price}</SalePrice>
+                    <Price>${product?.salePrice}</Price>
+                  </>
+                ) : (
+                  <Price>${product?.price}</Price>
+                )}
+              </Block>
             </Block>
 
             <Block
@@ -117,6 +123,16 @@ const Price = styled.Text`
   font-size: 16px;
   line-height: 24px;
   color: ${theme.primary};
+`;
+
+const SalePrice = styled.Text`
+  font-family: ${theme.fonts.semiBold};
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: line-through;
+  text-decoration-color: ${theme.neutral4};
+  color: ${theme.neutral4};
+  margin-right: 6px;
 `;
 
 const Wrapper = styled.View`

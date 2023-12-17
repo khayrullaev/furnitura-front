@@ -76,8 +76,14 @@ const ProductCard = ({
           <Title>{title}</Title>
           <Overview numberOfLines={2}>{overview}</Overview>
           <Block flexDirection="row">
-            {isSale && <SalePrice>{`$${salePrice}`}</SalePrice>}
-            <Price>{`$${price}`}</Price>
+            {isSale ? (
+              <>
+                <SalePrice>{`$${price}`}</SalePrice>
+                <Price>{`$${salePrice}`}</Price>
+              </>
+            ) : (
+              <Price>{`$${price}`}</Price>
+            )}
           </Block>
         </InfoWrapper>
       </CardWrapper>

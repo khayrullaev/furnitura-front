@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { useSelector } from "react-redux";
@@ -10,18 +10,26 @@ import { Block, Button, CommonText } from "../../../components/common";
 // styles
 import { theme } from "../../../styles";
 
-const Cart = () => {
+const Cart = ({ navigation }: any) => {
   const { cartItems } = useSelector((state: any) => state.cart);
 
-  const total = Array.isArray(cartItems)
-    ? cartItems.reduce((prev, curr) => prev + curr.price * curr.quantity, 0)
-    : 0;
+  console.log(cartItems);
+
+  const total = useMemo(() => {
+    if (!Array.isArray(cartItems) || cartItems.length === 0) return 0;
+
+    return cartItems.reduce((prev, curr) => {
+      const productPrice = curr.isSale ? curr.salePrice : curr.price;
+
+      return prev + productPrice * curr.quantity;
+    }, 0);
+  }, [cartItems]);
 
   return (
     <PageWrapper>
       <ScrollView style={{ padding: 24 }}>
         {cartItems?.map((item: any) => (
-          <CartItem product={item} />
+          <CartItem key={item._id} product={item} />
         ))}
       </ScrollView>
 
@@ -55,7 +63,12 @@ const Cart = () => {
             variant="contained"
             buttonStyle={{ marginBottom: 20 }}
             title="Payment"
-            onPress={() => {}}
+            onPress={() =>
+              navigation.navigate("PaymentForm", {
+                total,
+                products: cartItems,
+              })
+            }
           />
         </Block>
       )}

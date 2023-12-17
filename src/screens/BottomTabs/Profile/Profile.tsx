@@ -3,9 +3,11 @@ import React from "react";
 import { Button } from "../../../components/common";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Profile = () => {
+const Profile = ({ navigation }: any) => {
   const handleLogout = async () => {
-    await AsyncStorage.removeItem("accessToken");
+    await AsyncStorage.removeItem("accessToken").then(
+      navigation.navigate("SplashScreen")
+    );
   };
 
   return (

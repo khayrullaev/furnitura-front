@@ -39,10 +39,10 @@ export const cart = createSlice({
     },
 
     removeItem: (state: any, action: any) => {
-      const removeItem = state.cartItems.filter(
-        (item: any) => item.id !== action.payload
+      const renewedCart = state.cartItems.filter(
+        (item: any) => item._id !== action.payload
       );
-      state.cartItems = removeItem;
+      state.cartItems = renewedCart;
     },
 
     setLoading: (state) => {
@@ -60,6 +60,7 @@ export const {
   addToCart,
   increment,
   decrement,
+  removeItem,
   setLoading,
   setError,
   resetCartData,
