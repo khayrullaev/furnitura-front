@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { StyleProp, ViewStyle } from "react-native";
+import { StyleProp, ViewStyle, ActivityIndicator } from "react-native";
 
 // styles
 import { theme } from "../../styles/theme";
@@ -9,6 +9,7 @@ type Props = {
   variant: "contained" | "text";
   title: string;
   onPress: () => void;
+  loading?: boolean;
   disabled?: boolean | undefined;
   textButtonColor?: string;
   textButtonSize?: number;
@@ -20,6 +21,7 @@ const CustomButton = ({
   title,
   onPress,
   disabled,
+  loading = false,
   textButtonColor,
   textButtonSize,
   buttonStyle,
@@ -32,7 +34,9 @@ const CustomButton = ({
         disabled={disabled}
         activeOpacity={0.8}
       >
-        <ContainedButtonTitle disabled={disabled}>{title}</ContainedButtonTitle>
+        <ContainedButtonTitle disabled={disabled}>
+          {loading ? <ActivityIndicator /> : title}
+        </ContainedButtonTitle>
       </ContainedButton>
     );
   } else {

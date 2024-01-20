@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Image, Pressable } from "react-native";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { View, StyleSheet, Image, Pressable, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+import { useDispatch, useSelector } from "react-redux";
 
 // components
 import {
@@ -23,6 +23,9 @@ import {
 // styles
 import { theme } from "../../../styles";
 
+// redux
+import { addToCart } from "../../../redux/slices/cartSlice";
+
 const TABS = [
   {
     id: 0,
@@ -39,8 +42,21 @@ const TABS = [
 ];
 
 const ProductDetail = ({ navigation, route }: any) => {
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((state: any) => state.cart);
   const [tab, setTab] = useState<number>(0);
   const { details } = route.params;
+
+  const onProductAdd = () => {
+    const found = cartItems.find((item: any) => item?._id === details?._id);
+
+    if (found) {
+      Alert.alert("This product is already in cart");
+    } else {
+      dispatch(addToCart(details));
+      Alert.alert("Successfully added to cart");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -87,15 +103,28 @@ const ProductDetail = ({ navigation, route }: any) => {
           alignItems="center"
           style={{ marginTop: 12, marginBottom: 20 }}
         >
-          {details.isSale && <SalePrice>{`$${details.salePrice}`}</SalePrice>}
-          <CommonText
-            fontFamily={theme.fonts.bold}
-            size={18}
-            lineHeight={28}
-            color={theme.primary}
-          >
-            {`$${details.price}`}
-          </CommonText>
+          {details.isSale ? (
+            <>
+              <SalePrice>{`$${details.price}`}</SalePrice>
+              <CommonText
+                fontFamily={theme.fonts.bold}
+                size={18}
+                lineHeight={28}
+                color={theme.primary}
+              >
+                {`$${details.salePrice}`}
+              </CommonText>
+            </>
+          ) : (
+            <CommonText
+              fontFamily={theme.fonts.bold}
+              size={18}
+              lineHeight={28}
+              color={theme.primary}
+            >
+              {`$${details.price}`}
+            </CommonText>
+          )}
         </Block>
 
         <Block
@@ -196,11 +225,7 @@ const ProductDetail = ({ navigation, route }: any) => {
         {tab === 2 && <CommonText>Review</CommonText>}
       </View>
       <View style={styles.bottomButton}>
-        <Button
-          title="Add to bag"
-          variant="contained"
-          onPress={() => console.log("handle add to bag")}
-        />
+        <Button title="Add to bag" variant="contained" onPress={onProductAdd} />
       </View>
     </SafeAreaView>
   );

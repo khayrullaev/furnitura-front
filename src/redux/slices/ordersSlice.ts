@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface UserSlice {
+interface OrderSlice {
   orderList: Array<Object>;
   loading: boolean;
   error: string;
 }
 
-const initialState: UserSlice = {
+const initialState: OrderSlice = {
   orderList: [],
   loading: false,
   error: "",

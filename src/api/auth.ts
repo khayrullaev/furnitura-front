@@ -49,4 +49,20 @@ const forgotPassword = async (email: string) => {
   }
 };
 
-export const authApi = { login, signup, forgotPassword };
+const resetPassword = async (email: string, password: string, otp: string) => {
+  try {
+    const { data }: AuthApiResponse = await api.post("/auth/reset-password", {
+      email,
+      password,
+      otp: Number(otp),
+    });
+    if (data.status) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log("ResetPassword -> ", error);
+  }
+};
+
+export const authApi = { login, signup, forgotPassword, resetPassword };

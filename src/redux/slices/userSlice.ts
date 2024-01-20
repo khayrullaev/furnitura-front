@@ -46,10 +46,18 @@ export const {
 
 export default user.reducer;
 
-export const getProfileInfo = () => async () => {
+export const getProfileInfo = () => async (dispatch: any) => {
   const token = await AsyncStorage.getItem("accessToken");
+
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    await api.get("/user/info").then(({ data }) => {
+      dispatch(
+        setUserData({
+          ...data.data,
+        })
+      );
+    });
     return true;
   } else return false;
 };

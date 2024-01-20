@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import { StyleSheet, FlatList } from "react-native";
 
@@ -6,53 +6,27 @@ import { StyleSheet, FlatList } from "react-native";
 import { CategorySelect } from "../../../components/store";
 import { ProductCard } from "../../../components/common";
 
-const STORE_DATA = {
-  products: [
-    {
-      id: 1,
-      title: "Gray beam",
-      overview: "Tulip chair Table furniture",
-      price: 85,
-      isSale: false,
-      src: "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png",
-    },
-    {
-      id: 2,
-      title: "Gray beam",
-      overview: "Tulip chair Table furniture",
-      price: 85,
-      isSale: false,
-      src: "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png",
-    },
-    {
-      id: 3,
-      title: "Gray beam",
-      overview: "Tulip chair Table furniture",
-      price: 85,
-      isSale: false,
-      src: "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png",
-    },
-    {
-      id: 4,
-      title: "Gray beam",
-      overview: "Tulip chair Table furniture",
-      price: 85,
-      isSale: false,
-      src: "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png",
-    },
-    {
-      id: 5,
-      title: "Gray beam",
-      overview: "Tulip chair Table furniture",
-      price: 85,
-      isSale: false,
-      src: "https://res.cloudinary.com/dd4vsoahe/image/upload/v1651329679/furnitura/products/pngwing_1-17_vmoow6.png",
-    },
-  ],
-};
+// api
+import { storeApi } from "../../../api/store";
+
+// hooks
+import { useLoadingContext } from "../../../hooks";
 
 const Store = ({ navigation }: any) => {
   const [category, setCategory] = useState<string>("");
+  const [data, setData] = useState<any>([]);
+  const { toggleLoading } = useLoadingContext();
+
+  const fetchStoreProducts = async () => {
+    toggleLoading(true);
+    const res: any = await storeApi.getStoreProducts(category);
+    setData(res.data);
+    toggleLoading(false);
+  };
+
+  useEffect(() => {
+    fetchStoreProducts();
+  }, [category]);
 
   return (
     <PageWrapper>
@@ -62,20 +36,13 @@ const Store = ({ navigation }: any) => {
         style={styles.flatlist}
         numColumns={2}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
         contentContainerStyle={styles.flatlistContainer}
-        data={STORE_DATA.products}
+        data={data.products}
         renderItem={({ item }) => {
           return (
             <ProductCardWrapper>
-              <ProductCard
-                id={item.id}
-                title={item.title}
-                overview={item.overview}
-                price={item.price}
-                isSale={item.isSale}
-                src={item.src}
-              />
+              <ProductCard {...item} />
             </ProductCardWrapper>
           );
         }}
@@ -88,6 +55,7 @@ const styles = StyleSheet.create({
   flatlist: {
     paddingHorizontal: 24,
     paddingVertical: 24,
+    height: "100%",
   },
   flatlistContainer: {
     paddingBottom: 140,

@@ -1,14 +1,13 @@
 import { api } from "../utils";
 
-const getHomeProducts = async () => {
+const getCollections = async () => {
   try {
-    const { data } = await api.get("/product/home");
+    const { data } = await api.get("/collections/list");
     if (data.status === 0) return null;
     return data;
   } catch (error) {
     console.log("Home -> ", error);
-    return {};
   }
 };
 
-export const homeApi = { getHomeProducts };
+export const newsApi = { getCollections };

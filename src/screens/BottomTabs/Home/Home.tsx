@@ -38,9 +38,9 @@ const Home = () => {
           <FlatList
             style={styles.flatlist}
             horizontal={true}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item._id}
             data={data?.collections}
-            renderItem={({ item }) => <CollectionCard url={item.url} />}
+            renderItem={({ item }) => <CollectionCard url={item.imageUrl} />}
             showsHorizontalScrollIndicator={false}
           />
         </CollectionWrapper>

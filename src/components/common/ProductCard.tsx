@@ -13,7 +13,7 @@ import { theme } from "../../styles";
 import { HeartIcon, ReportIcon, ShareIcon } from "../svgicons";
 
 type Props = {
-  id?: number;
+  _id?: string;
   imageUrl?: string | undefined;
   title: string;
   overview?: string;
@@ -25,7 +25,7 @@ type Props = {
 };
 
 const ProductCard = ({
-  id,
+  _id,
   imageUrl,
   title,
   overview,
@@ -43,7 +43,7 @@ const ProductCard = ({
       onPress={() =>
         navigation.navigate("ProductDetail", {
           details: {
-            id,
+            _id,
             imageUrl,
             title,
             overview,
@@ -76,8 +76,14 @@ const ProductCard = ({
           <Title>{title}</Title>
           <Overview numberOfLines={2}>{overview}</Overview>
           <Block flexDirection="row">
-            {isSale && <SalePrice>{`$${salePrice}`}</SalePrice>}
-            <Price>{`$${price}`}</Price>
+            {isSale ? (
+              <>
+                <SalePrice>{`$${price}`}</SalePrice>
+                <Price>{`$${salePrice}`}</Price>
+              </>
+            ) : (
+              <Price>{`$${price}`}</Price>
+            )}
           </Block>
         </InfoWrapper>
       </CardWrapper>
@@ -128,6 +134,8 @@ const Title = styled.Text`
   line-height: 24px;
   color: ${theme.neutral1};
   margin-bottom: 4px;
+  overflow: hidden;
+  text-align: left;
 `;
 
 const Overview = styled.Text`

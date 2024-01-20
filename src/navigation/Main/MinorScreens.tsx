@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // screens
-import { ProductDetail, StoreDetail } from "../../screens";
+import { ProductDetail, StoreDetail, PaymentForm } from "../../screens";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +15,11 @@ const routesConfig = [
   {
     name: "StoreDetail",
     component: StoreDetail,
+    options: {},
+  },
+  {
+    name: "PaymentForm",
+    component: PaymentForm,
     options: {},
   },
 ];

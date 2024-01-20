@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components/native";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
 
 // hooks
 import { useLoadingContext } from "../../hooks";
 
 // api
-// import { handleLogin } from "../../redux/slices/authSlice";
 import { authApi } from "../../api/auth";
 
 // components
@@ -18,7 +18,11 @@ import { Button } from "../../components/common";
 // styles
 import { theme } from "../../styles";
 
+// redux
+import { getProfileInfo } from "../../redux/slices/userSlice";
+
 const Login = ({ navigation }: any) => {
+  const dispatch = useDispatch();
   const { toggleLoading } = useLoadingContext();
 
   const ValidationSchema = Yup.object().shape({
@@ -31,6 +35,7 @@ const Login = ({ navigation }: any) => {
     const isLoggedIn: any = await authApi.login(values.email, values.password);
 
     if (isLoggedIn) {
+      await dispatch(getProfileInfo());
       navigation.replace("Main");
     }
     toggleLoading(false);
