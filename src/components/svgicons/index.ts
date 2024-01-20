@@ -16,6 +16,8 @@ import CategoryLamp from "./CategoryLamp";
 import CategoryChair from "./CategoryChair";
 import CategoryTable from "./CategoryTable";
 import CategoryBath from "./CategoryBath";
+import OrdersIcon from "./OrdersIcon";
+import LogoutIcon from "./LogoutIcon";
 
 export {
   HomeIcon,
@@ -36,4 +38,6 @@ export {
   CategoryChair,
   CategoryTable,
   CategoryBath,
+  OrdersIcon,
+  LogoutIcon,
 };

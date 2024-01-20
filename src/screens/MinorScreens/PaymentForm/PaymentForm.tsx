@@ -1,15 +1,27 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Alert } from "react-native";
+import { useDispatch } from "react-redux";
+import * as Yup from "yup";
+import { Formik } from "formik";
+
+// components
 import { PhoneNumberInput, TextField } from "../../../components/form";
 import { Block, CommonText, Button } from "../../../components/common";
-import { theme } from "../../../styles/theme";
 import { Screen } from "../../../components/layout";
-import { Formik } from "formik";
-import * as Yup from "yup";
+
+// styles
+import { theme } from "../../../styles/theme";
+
+// utils
 import { api } from "../../../utils";
 
+// redux
+import { resetCartData } from "../../../redux/slices/cartSlice";
+
 function PaymentForm(props: any) {
-  const { total, products, navigation } = props.route.params;
+  const dispatch = useDispatch();
+  const { total, products } = props.route.params;
+  const { navigation } = props;
 
   const ValidationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required!"),
@@ -19,17 +31,22 @@ function PaymentForm(props: any) {
   });
 
   const handleSubmit = async (receiver: any) => {
-    await api
-      .post("/order", {
-        products: products.map((el: any) => {
-          return { productId: el._id, quantity: el.quantity };
-        }),
-        receiver,
-      })
-      .then((data) => {
-        Alert.alert("Order", "Successfully placed your order!");
-        navigation.navigate("Home");
-      });
+    try {
+      await api
+        .post("/order", {
+          products: products.map((el: any) => {
+            return { productId: el._id, quantity: el.quantity };
+          }),
+          receiver,
+        })
+        .then((data) => {
+          Alert.alert("Order", "Successfully placed your order!");
+          dispatch(resetCartData());
+          navigation.navigate("Home");
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

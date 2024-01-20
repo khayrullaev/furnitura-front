@@ -18,7 +18,10 @@ const TabHeader = ({ title }: Props) => {
     <HeaderWrapper>
       <Wrapper>
         <ScreenName>{title ? title : "Screen"}</ScreenName>
-        <IconButton onPress={() => console.log("5454")} icon={SearchIcon} />
+        <IconButton
+          onPress={() => console.log("Search Modal")}
+          icon={SearchIcon}
+        />
       </Wrapper>
     </HeaderWrapper>
   );

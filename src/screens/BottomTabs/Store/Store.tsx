@@ -17,19 +17,16 @@ const Store = ({ navigation }: any) => {
   const [data, setData] = useState<any>([]);
   const { toggleLoading } = useLoadingContext();
 
-  const fetchHomeProducts = async () => {
+  const fetchStoreProducts = async () => {
     toggleLoading(true);
     const res: any = await storeApi.getStoreProducts(category);
-    console.log(res);
     setData(res.data);
     toggleLoading(false);
   };
 
   useEffect(() => {
-    fetchHomeProducts();
+    fetchStoreProducts();
   }, [category]);
-
-  console.log(data?.products);
 
   return (
     <PageWrapper>

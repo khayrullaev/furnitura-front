@@ -27,6 +27,7 @@ import { useLoadingContext } from "../../hooks";
 const ForgotPassword = ({ navigation }: any) => {
   const { toggleLoading } = useLoadingContext();
   const [emailSent, setEmailSent] = useState<boolean>(false);
+  const [emailValue, setEmailValue] = useState<string>("");
   const [value, setValue] = useState("");
   const ref = useBlurOnFulfill({ value, cellCount: 4 });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -42,6 +43,7 @@ const ForgotPassword = ({ navigation }: any) => {
     toggleLoading(true);
     const success: any = await authApi.forgotPassword(email);
     if (success) {
+      setEmailValue(email);
       setEmailSent(true);
     }
     toggleLoading(false);
@@ -61,7 +63,7 @@ const ForgotPassword = ({ navigation }: any) => {
           <View>
             <InfoTextWrapper>
               <InfoText>
-                We have sent the login code to your email, please check your
+                We have sent a security code to your email, please check your
                 mail to confirm your account.
               </InfoText>
             </InfoTextWrapper>
@@ -99,7 +101,12 @@ const ForgotPassword = ({ navigation }: any) => {
           <Button
             variant="contained"
             title={"Confirm"}
-            onPress={() => console.log("sss")}
+            onPress={() =>
+              navigation.navigate("ResetPassword", {
+                otp: value,
+                email: emailValue,
+              })
+            }
           />
         </PageWrapper>
       ) : (

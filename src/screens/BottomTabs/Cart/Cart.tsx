@@ -13,8 +13,6 @@ import { theme } from "../../../styles";
 const Cart = ({ navigation }: any) => {
   const { cartItems } = useSelector((state: any) => state.cart);
 
-  console.log(cartItems);
-
   const total = useMemo(() => {
     if (!Array.isArray(cartItems) || cartItems.length === 0) return 0;
 
